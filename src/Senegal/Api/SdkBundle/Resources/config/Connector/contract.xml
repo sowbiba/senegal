@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.contract.doctrine" class="Pfd\Sdk\Contract\Connector\Doctrine\ContractDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <service id="pfd.connector.contract.propel" class="Pfd\Sdk\Contract\Connector\Propel\ContractPropelConnector" parent="pfd.abstract_connector.propel" public="false" />
+        <service id="pfd.connector.contract.data" class="Pfd\Sdk\Contract\Connector\Data\ContractDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.contract" class="Pfd\Sdk\Contract\Connector\ContractConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.contract.doctrine"></argument>
+                <argument type="service" id="pfd.connector.contract.propel"></argument>
+                <argument type="service" id="pfd.connector.contract.data"></argument>
+            </argument>
+        </service>
+    </services>
+</container>

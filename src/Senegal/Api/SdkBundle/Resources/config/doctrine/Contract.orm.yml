@@ -1,0 +1,103 @@
+#Contract.orm.yml
+Senegal\Api\SdkBundle\Entity\Contract:
+    type: entity
+    table: contrats
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        planName:
+            type:   string
+            column: formule_name
+        planNumber:
+            type:   integer
+            column: formule_position
+        planTotalNumber:
+            type:   integer
+            column: formule_total
+        planActive:
+            type:   integer
+            column: formule_active
+        isActive:
+            type: integer
+            column: is_active
+        isMarketed:
+            type:   integer
+            column: commercialise
+        parentId:
+            type:   integer
+            column: contratspere_id
+        isParent:
+            type:   integer
+            column: is_contratpere
+        isFuture:
+            type:   boolean
+            column: is_future
+        releasedAt:
+            type:     datetime
+            column:   released_at
+            nullable: true
+        inheritsDocuments:
+            type:     boolean
+            column:   contratspere_docs
+        inheritsFunds:
+            type:     boolean
+            column:   contratspere_fonds
+        currentId:
+            type:     integer
+            column:   current_contract_id
+    manyToOne:
+        productLine:
+            targetEntity: ProductLine
+            joinColumn:
+                name:                 gammes_id
+                referencedColumnName: id
+    oneToMany:
+        revisions:
+            targetEntity: Revision
+            mappedBy: contract
+    manyToMany:
+        documents:
+            targetEntity: Document
+            inversedBy:   contracts
+            joinTable:
+                name: contrat_has_documents
+                joinColumns:
+                    Contract_id:
+                        name: contrats_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    Documents_id:
+                        name: documents_id
+                        referencedColumnName: id
+                        unique: true
+        distributors:
+            targetEntity: Company
+            inversedBy:   contracts
+            joinTable:
+                name: contrat_has_distributeur
+                joinColumns:
+                    Contract_id:
+                        name: contrats_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    Company_id:
+                        name: societes_id
+                        referencedColumnName: id
+        insurers:
+            targetEntity: Company
+            inversedBy:   contracts
+            joinTable:
+                name: contrat_has_assureur
+                joinColumns:
+                    Contract_id:
+                        name: contrats_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    Company_id:
+                        name: societes_id
+                        referencedColumnName: id

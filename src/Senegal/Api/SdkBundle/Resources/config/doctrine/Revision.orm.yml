@@ -1,0 +1,60 @@
+#Revision.orm.yml
+Senegal\Api\SdkBundle\Entity\Revision:
+    type: entity
+    table: revision
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: integer
+        status:
+            type: integer
+        createdAt:
+            type:   datetime
+            column: created_at
+        updatedAt:
+            type:   datetime
+            column: updated_at
+        publishedAt:
+            type:     datetime
+            column:   published_at
+            nullable: true
+        createdBy:
+            type:   integer
+            column: created_by
+        updatedBy:
+            type:   integer
+            column: updated_by
+        publishedBy:
+            type:     integer
+            column:   published_by
+            nullable: true
+        isCloned:
+            type:     boolean
+            column:   is_cloned
+        isLocked:
+            type:     boolean
+            column:   is_locked
+    manyToOne:
+        contract:
+            targetEntity: Contract
+            joinColumn:
+                name:                 contract_id
+                referencedColumnName: id
+    manyToMany:
+        documents:
+            targetEntity: Document
+            inversedBy:   revisions
+            joinTable:
+                name: revision_has_document
+                joinColumns:
+                    Revision_id:
+                        name: revision_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    Document_id:
+                        name: document_id
+                        referencedColumnName: id

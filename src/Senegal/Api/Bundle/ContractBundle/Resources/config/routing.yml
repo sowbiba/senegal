@@ -1,0 +1,13 @@
+contracts:
+    type:     rest
+    resource: Senegal\Api\Bundle\ContractBundle\Controller\ContractController
+    prefix: /
+
+revisions:
+    type:     rest
+    #parent: contracts
+    resource: Senegal\Api\Bundle\ContractBundle\Controller\RevisionController
+
+documents:
+    type:     rest
+    resource: Senegal\Api\Bundle\ContractBundle\Controller\DocumentController

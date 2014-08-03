@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="Connector/chapter.xml"/>
+        <import resource="Connector/company.xml"/>
+        <import resource="Connector/companyGroup.xml"/>
+        <import resource="Connector/companyType.xml"/>
+        <import resource="Connector/contract.xml"/>
+        <import resource="Connector/document.xml"/>
+        <import resource="Connector/field.xml"/>
+        <import resource="Connector/market.xml"/>
+        <import resource="Connector/media.xml"/>
+        <import resource="Connector/productLine.xml"/>
+        <import resource="Connector/revision.xml"/>
+        <import resource="Connector/user.xml"/>
+        <import resource="Connector/role.xml"/>
+    </imports>
+
+    <parameters>
+        <parameter key="pfd.abstract_connector.class">Pfd\Sdk\Connector\AbstractConnector</parameter>
+        <parameter key="pfd.abstract_connector.webservice.class">Pfd\Sdk\Connector\AbstractWebserviceConnector</parameter>
+        <parameter key="pfd.abstract_connector.doctrine.class">Pfd\Sdk\Connector\AbstractDoctrineConnector</parameter>
+        <parameter key="pfd.abstract_connector.propel.class">Pfd\Sdk\Connector\AbstractPropelConnector</parameter>
+        <parameter key="pfd.abstract_connector.data.class">Pfd\Sdk\Connector\AbstractDataConnector</parameter>
+    </parameters>
+
+    <services>
+        <service id="pfd.abstract_connector" abstract="true" class="%pfd.abstract_connector.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"></argument>
+            </call>
+            <call method="setLogger">
+                <argument type="service" id="logger"></argument>
+            </call>
+        </service>
+
+        <service id="pfd.abstract_connector.webservice" class="%pfd.abstract_connector.webservice.class%" parent="pfd.abstract_connector">
+            <argument type="service" id="pfd.client.espri"></argument>
+        </service>
+
+        <service id="pfd.abstract_connector.doctrine" class="%pfd.abstract_connector.doctrine.class%" parent="pfd.abstract_connector">
+            <argument type="service" id="doctrine.orm.entity_manager"></argument>
+        </service>
+
+        <service id="pfd.abstract_connector.propel" class="%pfd.abstract_connector.propel.class%" parent="pfd.abstract_connector">
+            <argument type="service" id="pfd.bridge"></argument>
+        </service>
+
+        <service id="pfd.abstract_connector.data" class="%pfd.abstract_connector.data.class%" parent="pfd.abstract_connector">
+            <argument></argument>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.media.webservice" class="Pfd\Sdk\Media\Connector\Webservice\MediaWebserviceConnector" public="false" >
+            <argument type="service" id="pfd.client.espri"></argument>
+        </service>
+
+        <service id="pfd.connector.media" class="Pfd\Sdk\Media\Connector\MediaConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.media.webservice"></argument>
+            </argument>
+        </service>
+    </services>
+</container>

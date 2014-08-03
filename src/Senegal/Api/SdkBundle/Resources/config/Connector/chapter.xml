@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.chapter.doctrine" class="Pfd\Sdk\Chapter\Connector\Doctrine\ChapterDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <!--<service id="pfd.connector.chapter.propel" class="Pfd\Sdk\Chapter\Connector\Propel\ChapterPropelConnector" parent="pfd.abstract_connector.propel" public="false" />-->
+        <service id="pfd.connector.chapter.data" class="Pfd\Sdk\Chapter\Connector\Data\ChapterDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.chapter" class="Pfd\Sdk\Chapter\Connector\ChapterConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.chapter.doctrine"></argument>
+                <!--<argument type="service" id="pfd.connector.chapter.propel"></argument>-->
+                <argument type="service" id="pfd.connector.chapter.data"></argument>
+            </argument>
+        </service>
+    </services>
+</container>

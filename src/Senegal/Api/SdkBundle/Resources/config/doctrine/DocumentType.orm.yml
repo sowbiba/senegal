@@ -1,0 +1,16 @@
+#Contract.orm.yml
+Senegal\Api\SdkBundle\Entity\DocumentType:
+    type: entity
+    table: documentsnature
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+    OneToMany:
+        documents:
+            targetEntity: Document
+            mappedBy:     type

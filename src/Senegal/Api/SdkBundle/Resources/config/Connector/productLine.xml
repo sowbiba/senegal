@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.productLine.doctrine" class="Pfd\Sdk\ProductLine\Connector\Doctrine\ProductLineDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <service id="pfd.connector.productLine.propel" class="Pfd\Sdk\ProductLine\Connector\Propel\ProductLinePropelConnector" parent="pfd.abstract_connector.propel" public="false" />
+        <service id="pfd.connector.productLine.data" class="Pfd\Sdk\ProductLine\Connector\Data\ProductLineDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.productLine" class="Pfd\Sdk\ProductLine\Connector\ProductLineConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.productLine.propel"></argument>
+                <argument type="service" id="pfd.connector.productLine.doctrine"></argument>
+                <argument type="service" id="pfd.connector.productLine.data"></argument>
+            </argument>
+            <call method="setValidator">
+                <argument id="validator" type="service"></argument>
+            </call>
+        </service>
+    </services>
+</container>

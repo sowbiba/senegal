@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.role.doctrine" class="Pfd\Sdk\Role\Connector\Doctrine\RoleDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <service id="pfd.connector.role.data" class="Pfd\Sdk\Role\Connector\Data\RoleDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.role" class="Pfd\Sdk\Role\Connector\RoleConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.role.doctrine"></argument>
+                <argument type="service" id="pfd.connector.role.data"></argument>
+            </argument>
+        </service>
+    </services>
+</container>

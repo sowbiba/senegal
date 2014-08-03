@@ -1,0 +1,36 @@
+#Chapter.orm.yml
+Senegal\Api\SdkBundle\Entity\Field:
+    type: entity
+    table: champs
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        chapterId:
+            type:   integer
+            column: chapitres_id
+        typeId:
+            type:   integer
+            column: typechamps_id
+        unit:
+            type:   string
+            column: unite
+        displayOrder:
+            type:   integer
+            column: ordre
+        listId:
+            type: integer
+            column: listesvaleur_id
+        isSourceable:
+            type:   boolean
+            column: is_sourceable
+        businessDefinition:
+            type: string
+            column: business_definition
+        integrationRule:
+            type: string
+            column: integration_rule

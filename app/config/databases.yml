@@ -1,0 +1,8 @@
+parameters:
+
+    database_driver:     pdo_mysql
+    database_host:       "mysql.lesdossiers.com"
+    database_port:       "3306"
+    database_name:       "recette_observer_dev"
+    database_user:       "root"
+    database_password:   "root"

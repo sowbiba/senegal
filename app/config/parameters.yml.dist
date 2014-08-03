@@ -1,0 +1,26 @@
+parameters:
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: noreply@profideo.com
+    mailer_password: testray
+    mailer_port: 465
+    mailer_encryption: ssl
+    mailer_auth: login
+    mailer_delivery_address: exploitation@profideo.com
+
+    #symfony conf
+    locale:              fr
+    secret:              testray
+
+    #session managment
+    observer_root_dir:   /path/to/observer_dir
+    observer_host:       http://observer.localhost
+
+    #documents upload
+    upload_dir:          /import/documents/
+    upload_tmp_dir:      %kernel.root_dir%/../web/uploads/document/
+    web_dir:             %kernel.root_dir%/../web/
+
+    espri_ws_url: 'http://espri.dev/ws/'
+    espri_ws_user: ???
+    espri_ws_password: ????

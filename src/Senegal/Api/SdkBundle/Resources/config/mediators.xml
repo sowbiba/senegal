@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.mediator.sdk" class="Pfd\Sdk\Mediator\SdkMediator">
+            <call method="setColleagueList">
+                <argument key="colleagueList" type="collection">
+                    <argument type="service" id="pfd.sdk.company"></argument>
+                    <argument type="service" id="pfd.sdk.companyType"></argument>
+                    <argument type="service" id="pfd.sdk.contract"></argument>
+                    <argument type="service" id="pfd.sdk.productLine"></argument>
+                    <argument type="service" id="pfd.sdk.productLineRulesHandler"></argument>
+                    <argument type="service" id="pfd.sdk.chapter"></argument>
+                    <argument type="service" id="pfd.sdk.document"></argument>
+                    <argument type="service" id="pfd.sdk.document_type"></argument>
+                    <argument type="service" id="pfd.sdk.field"></argument>
+                    <argument type="service" id="pfd.sdk.market"></argument>
+                    <argument type="service" id="pfd.sdk.media"></argument>
+                    <argument type="service" id="pfd.sdk.revision"></argument>
+                    <argument type="service" id="pfd.sdk.company"></argument>
+                    <argument type="service" id="pfd.sdk.companyGroup"></argument>
+                    <argument type="service" id="pfd.sdk.user"></argument>
+                    <argument type="service" id="pfd.sdk.role"></argument>
+                </argument>
+            </call>
+            <argument type="service" id="logger"></argument>
+        </service>
+
+        <service id="pfd.mediator.connector" class="Pfd\Sdk\Mediator\ConnectorMediator">
+            <call method="setColleagueList">
+                <argument key="colleagueList" type="collection">
+                    <argument type="service" id="pfd.connector.chapter"></argument>
+                    <argument type="service" id="pfd.connector.company"></argument>
+                    <argument type="service" id="pfd.connector.companyGroup"></argument>
+                    <argument type="service" id="pfd.connector.contract"></argument>
+                    <argument type="service" id="pfd.connector.companyType"></argument>
+                    <argument type="service" id="pfd.connector.document"></argument>
+                    <argument type="service" id="pfd.connector.field"></argument>
+                    <argument type="service" id="pfd.connector.market"></argument>
+                    <argument type="service" id="pfd.connector.media"></argument>
+                    <argument type="service" id="pfd.connector.productLine"></argument>
+                    <argument type="service" id="pfd.connector.revision"></argument>
+                    <argument type="service" id="pfd.connector.user"></argument>
+                    <argument type="service" id="pfd.connector.role"></argument>
+                </argument>
+            </call>
+            <argument type="service" id="logger"></argument>
+        </service>
+    </services>
+</container>

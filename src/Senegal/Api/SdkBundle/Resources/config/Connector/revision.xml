@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.revision.doctrine" class="Pfd\Sdk\Revision\Connector\Doctrine\RevisionDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <service id="pfd.connector.revision.data" class="Pfd\Sdk\Revision\Connector\Data\RevisionDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.revision" class="Pfd\Sdk\Revision\Connector\RevisionConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.revision.doctrine"></argument>
+                <argument type="service" id="pfd.connector.revision.data"></argument>
+            </argument>
+            <call method="setValidator">
+                <argument id="validator" type="service"></argument>
+            </call>
+        </service>
+    </services>
+</container>

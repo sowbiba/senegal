@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.connector.field.doctrine" class="Pfd\Sdk\Field\Connector\Doctrine\FieldDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
+        <service id="pfd.connector.field.propel" class="Pfd\Sdk\Field\Connector\Propel\FieldPropelConnector" parent="pfd.abstract_connector.propel" public="false" />
+        <service id="pfd.connector.field.data" class="Pfd\Sdk\Field\Connector\Data\FieldDataConnector" parent="pfd.abstract_connector.data" public="false" />
+
+        <service id="pfd.connector.field" class="Pfd\Sdk\Field\Connector\FieldConnector" parent="pfd.abstract_connector" public="false">
+            <argument type="collection">
+                <argument type="service" id="pfd.connector.field.doctrine"></argument>
+                <argument type="service" id="pfd.connector.field.propel"></argument>
+                <argument type="service" id="pfd.connector.field.data"></argument>
+            </argument>
+        </service>
+    </services>
+</container>

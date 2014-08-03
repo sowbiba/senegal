@@ -1,0 +1,23 @@
+Senegal\Api\SdkBundle\Entity\User:
+    type: entity
+    table: users
+    id:
+        id:
+            type: integer
+    fields:
+        username:
+            type: string
+    manyToMany:
+      roles:
+          targetEntity: Role
+          inversedBy:   users
+          joinTable:
+              name: sf_guard_user_permission
+              joinColumns:
+                  Users_id:
+                      name: user_id
+                      referencedColumnName: id
+              inverseJoinColumns:
+                  Roles_id:
+                      name: permission_id
+                      referencedColumnName: id

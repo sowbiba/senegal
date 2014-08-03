@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pfd.sdk.chapter" class="Pfd\Sdk\Chapter\ChapterSdk" public="false">
+            <argument type="service" id="pfd.connector.chapter"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.company" class="Pfd\Sdk\Company\CompanySdk" public="false">
+            <argument type="service" id="pfd.connector.company"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.companyGroup" class="Pfd\Sdk\CompanyGroup\CompanyGroupSdk" public="false">
+            <argument type="service" id="pfd.connector.companyGroup"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.companyType" class="Pfd\Sdk\CompanyType\CompanyTypeSdk" public="false">
+            <argument type="service" id="pfd.connector.companyType"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.contract" class="Pfd\Sdk\Contract\ContractSdk" public="false">
+            <argument type="service" id="pfd.connector.contract"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.document" class="Pfd\Sdk\Document\DocumentSdk" public="false">
+            <argument type="service" id="pfd.connector.document"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.document_type" class="Pfd\Sdk\Document\DocumentTypeSdk" public="false">
+            <argument type="service" id="pfd.connector.document"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.field" class="Pfd\Sdk\Field\FieldSdk" public="false">
+            <argument type="service" id="pfd.connector.field"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.market" class="Pfd\Sdk\Market\MarketSdk" public="false">
+            <argument type="service" id="pfd.connector.market"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.media" class="Pfd\Sdk\Media\MediaSdk" public="false">
+            <argument type="service" id="pfd.connector.media"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.productLine" class="Pfd\Sdk\ProductLine\ProductLineSdk" public="false">
+            <argument type="service" id="pfd.connector.productLine"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.productLineRulesHandler" class="Pfd\Sdk\ProductLine\ProductLineRulesHandler" public="false">
+            <argument type="service" id="pfd.connector.productLine"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.revision" class="Pfd\Sdk\Revision\RevisionSdk" public="false">
+            <argument type="service" id="pfd.connector.revision"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.user" class="Pfd\Sdk\User\UserSdk" public="false">
+            <argument type="service" id="pfd.connector.user"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="pfd.sdk.role" class="Pfd\Sdk\Role\RoleSdk" public="false">
+            <argument type="service" id="pfd.connector.role"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+    </services>
+</container>

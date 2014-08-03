@@ -1,0 +1,31 @@
+#Contract.orm.yml
+Senegal\Api\SdkBundle\Entity\ProductLine:
+    type: entity
+    table: gammes
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        isObsolete:
+            type:   string
+            column: is_obsolete
+        isRevisionable:
+            type:   string
+            column: is_revisionable
+        ruleSettingStatus:
+            type:   boolean
+            column: rule_setting_status
+        rootChapterId:
+            type:   integer
+            column: chapitresroot_id
+    OneToMany:
+        contracts:
+            targetEntity: Contract
+            mappedBy:     productLine
+        chaptersTree:
+            targetEntity: Chapter
+            mappedBy:     productLine

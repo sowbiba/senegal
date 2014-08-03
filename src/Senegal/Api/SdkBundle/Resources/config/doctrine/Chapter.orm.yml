@@ -1,0 +1,21 @@
+#Chapter.orm.yml
+Senegal\Api\SdkBundle\Entity\Chapter:
+    type: entity
+    table: chapitres
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        productLineId:
+            type:   integer
+            column: gammes_id
+        parentId:
+            type:   integer
+            column: tree_parent
+        isTable:
+            type: boolean
+            column: tableview
