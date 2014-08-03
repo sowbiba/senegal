@@ -21,15 +21,15 @@
     </imports>
 
     <parameters>
-        <parameter key="pfd.abstract_connector.class">Pfd\Sdk\Connector\AbstractConnector</parameter>
-        <parameter key="pfd.abstract_connector.webservice.class">Pfd\Sdk\Connector\AbstractWebserviceConnector</parameter>
-        <parameter key="pfd.abstract_connector.doctrine.class">Pfd\Sdk\Connector\AbstractDoctrineConnector</parameter>
-        <parameter key="pfd.abstract_connector.propel.class">Pfd\Sdk\Connector\AbstractPropelConnector</parameter>
-        <parameter key="pfd.abstract_connector.data.class">Pfd\Sdk\Connector\AbstractDataConnector</parameter>
+        <parameter key="senegal.api.abstract_connector.class">Pfd\Sdk\Connector\AbstractConnector</parameter>
+        <parameter key="senegal.api.abstract_connector.webservice.class">Pfd\Sdk\Connector\AbstractWebserviceConnector</parameter>
+        <parameter key="senegal.api.abstract_connector.doctrine.class">Pfd\Sdk\Connector\AbstractDoctrineConnector</parameter>
+        <parameter key="senegal.api.abstract_connector.propel.class">Pfd\Sdk\Connector\AbstractPropelConnector</parameter>
+        <parameter key="senegal.api.abstract_connector.data.class">Pfd\Sdk\Connector\AbstractDataConnector</parameter>
     </parameters>
 
     <services>
-        <service id="pfd.abstract_connector" abstract="true" class="%pfd.abstract_connector.class%">
+        <service id="senegal.api.abstract_connector" abstract="true" class="%senegal.api.abstract_connector.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"></argument>
             </call>
@@ -38,19 +38,19 @@
             </call>
         </service>
 
-        <service id="pfd.abstract_connector.webservice" class="%pfd.abstract_connector.webservice.class%" parent="pfd.abstract_connector">
-            <argument type="service" id="pfd.client.espri"></argument>
+        <service id="senegal.api.abstract_connector.webservice" class="%senegal.api.abstract_connector.webservice.class%" parent="senegal.api.abstract_connector">
+            <argument type="service" id="senegal.api.client.espri"></argument>
         </service>
 
-        <service id="pfd.abstract_connector.doctrine" class="%pfd.abstract_connector.doctrine.class%" parent="pfd.abstract_connector">
+        <service id="senegal.api.abstract_connector.doctrine" class="%senegal.api.abstract_connector.doctrine.class%" parent="senegal.api.abstract_connector">
             <argument type="service" id="doctrine.orm.entity_manager"></argument>
         </service>
 
-        <service id="pfd.abstract_connector.propel" class="%pfd.abstract_connector.propel.class%" parent="pfd.abstract_connector">
-            <argument type="service" id="pfd.bridge"></argument>
+        <service id="senegal.api.abstract_connector.propel" class="%senegal.api.abstract_connector.propel.class%" parent="senegal.api.abstract_connector">
+            <argument type="service" id="senegal.api.bridge"></argument>
         </service>
 
-        <service id="pfd.abstract_connector.data" class="%pfd.abstract_connector.data.class%" parent="pfd.abstract_connector">
+        <service id="senegal.api.abstract_connector.data" class="%senegal.api.abstract_connector.data.class%" parent="senegal.api.abstract_connector">
             <argument></argument>
         </service>
     </services>

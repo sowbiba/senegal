@@ -5,15 +5,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pfd.connector.document.doctrine" class="Pfd\Sdk\Document\Connector\Doctrine\DocumentDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
-        <service id="pfd.connector.documentType.doctrine" class="Pfd\Sdk\Document\Connector\Doctrine\DocumentTypeDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
-        <service id="pfd.connector.document.data" class="Pfd\Sdk\Document\Connector\Data\DocumentDataConnector" parent="pfd.abstract_connector.data" public="false" />
+        <service id="senegal.api.connector.document.doctrine" class="Pfd\Sdk\Document\Connector\Doctrine\DocumentDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />
+        <service id="senegal.api.connector.documentType.doctrine" class="Pfd\Sdk\Document\Connector\Doctrine\DocumentTypeDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />
+        <service id="senegal.api.connector.document.data" class="Pfd\Sdk\Document\Connector\Data\DocumentDataConnector" parent="senegal.api.abstract_connector.data" public="false" />
 
-        <service id="pfd.connector.document" class="Pfd\Sdk\Document\Connector\DocumentConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.document" class="Pfd\Sdk\Document\Connector\DocumentConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <argument type="service" id="pfd.connector.document.doctrine"></argument>
-                <argument type="service" id="pfd.connector.documentType.doctrine"></argument>
-                <argument type="service" id="pfd.connector.document.data"></argument>
+                <argument type="service" id="senegal.api.connector.document.doctrine"></argument>
+                <argument type="service" id="senegal.api.connector.documentType.doctrine"></argument>
+                <argument type="service" id="senegal.api.connector.document.data"></argument>
             </argument>
         </service>
     </services>

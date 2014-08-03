@@ -27,9 +27,9 @@ class PfdSdkExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter('pfd.observer.root_dir', $config['observer']['root_dir']);
-        $container->setParameter('pfd.observer.web_path', $config['observer']['web_path']);
-        $container->setParameter('pfd.observer.symfony_web_path', $config['observer']['symfony_web_path']);
-        $container->setParameter('pfd.observer.environment', $config['observer']['environment']);
+        $container->setParameter('senegal.api.observer.root_dir', $config['observer']['root_dir']);
+        $container->setParameter('senegal.api.observer.web_path', $config['observer']['web_path']);
+        $container->setParameter('senegal.api.observer.symfony_web_path', $config['observer']['symfony_web_path']);
+        $container->setParameter('senegal.api.observer.environment', $config['observer']['environment']);
     }
 }

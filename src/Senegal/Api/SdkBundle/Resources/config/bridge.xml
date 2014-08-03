@@ -5,14 +5,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="pfd.bridge.legacy_environment" type="constant">Pfd\Sdk\Bridge\LegacyBridge::PROD_ENV</parameter>
+        <parameter key="senegal.api.bridge.legacy_environment" type="constant">Pfd\Sdk\Bridge\LegacyBridge::PROD_ENV</parameter>
     </parameters>
 
     <services>
-        <service id="pfd.bridge" class="Pfd\Sdk\Bridge\LegacyBridge">
+        <service id="senegal.api.bridge" class="Pfd\Sdk\Bridge\LegacyBridge">
             <argument type="service" id="service_container" />
-            <argument>%pfd.observer.root_dir%</argument>
-            <argument>%pfd.observer.environment%</argument>
+            <argument>%senegal.api.observer.root_dir%</argument>
+            <argument>%senegal.api.observer.environment%</argument>
         </service>
     </services>
 </container>

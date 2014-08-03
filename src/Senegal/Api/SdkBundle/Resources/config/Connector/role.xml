@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pfd.connector.role.doctrine" class="Pfd\Sdk\Role\Connector\Doctrine\RoleDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
-        <service id="pfd.connector.role.data" class="Pfd\Sdk\Role\Connector\Data\RoleDataConnector" parent="pfd.abstract_connector.data" public="false" />
+        <service id="senegal.api.connector.role.doctrine" class="Pfd\Sdk\Role\Connector\Doctrine\RoleDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />
+        <service id="senegal.api.connector.role.data" class="Pfd\Sdk\Role\Connector\Data\RoleDataConnector" parent="senegal.api.abstract_connector.data" public="false" />
 
-        <service id="pfd.connector.role" class="Pfd\Sdk\Role\Connector\RoleConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.role" class="Pfd\Sdk\Role\Connector\RoleConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <argument type="service" id="pfd.connector.role.doctrine"></argument>
-                <argument type="service" id="pfd.connector.role.data"></argument>
+                <argument type="service" id="senegal.api.connector.role.doctrine"></argument>
+                <argument type="service" id="senegal.api.connector.role.data"></argument>
             </argument>
         </service>
     </services>

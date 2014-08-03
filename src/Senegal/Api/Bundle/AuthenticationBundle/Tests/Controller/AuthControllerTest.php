@@ -27,7 +27,7 @@ class AuthControllerTest extends WebTestCase
         $client->request('POST', '/login-check', array("login" => $login, "password" => $password));
         $response  = $client->getResponse();
         /** @var User $user */
-        $user = $client->getContainer()->get('pfd.mediator.sdk')->getSdk("user")->getByUsername($login);
+        $user = $client->getContainer()->get('senegal.api.mediator.sdk')->getSdk("user")->getByUsername($login);
         $data      = json_decode($response->getContent(), true);
 
         $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));

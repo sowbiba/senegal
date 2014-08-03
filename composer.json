@@ -1,8 +1,17 @@
 {
-  "name": "symfony/framework-standard-edition",
-  "license": "MIT",
-  "type": "project",
-  "description": "The \"Symfony Standard Edition\" distribution",
+  "name": "sowbiba/senegal-api",
+  "license": "proprietary",
+  "type": "library",
+  "description": "Senegal API",
+  "version": "1.0.0-dev",
+  "authors": [
+        {
+            "name": "Ibrahima SOW",
+            "email": "bibisaw@gmail.com",
+            "role": "Lead Developer"
+        }
+
+    ],
   "autoload": {
     "psr-0": {
       "": "src/"

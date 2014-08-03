@@ -5,15 +5,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pfd.connector.field.doctrine" class="Pfd\Sdk\Field\Connector\Doctrine\FieldDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
-        <service id="pfd.connector.field.propel" class="Pfd\Sdk\Field\Connector\Propel\FieldPropelConnector" parent="pfd.abstract_connector.propel" public="false" />
-        <service id="pfd.connector.field.data" class="Pfd\Sdk\Field\Connector\Data\FieldDataConnector" parent="pfd.abstract_connector.data" public="false" />
+        <service id="senegal.api.connector.field.doctrine" class="Pfd\Sdk\Field\Connector\Doctrine\FieldDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />
+        <service id="senegal.api.connector.field.propel" class="Pfd\Sdk\Field\Connector\Propel\FieldPropelConnector" parent="senegal.api.abstract_connector.propel" public="false" />
+        <service id="senegal.api.connector.field.data" class="Pfd\Sdk\Field\Connector\Data\FieldDataConnector" parent="senegal.api.abstract_connector.data" public="false" />
 
-        <service id="pfd.connector.field" class="Pfd\Sdk\Field\Connector\FieldConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.field" class="Pfd\Sdk\Field\Connector\FieldConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <argument type="service" id="pfd.connector.field.doctrine"></argument>
-                <argument type="service" id="pfd.connector.field.propel"></argument>
-                <argument type="service" id="pfd.connector.field.data"></argument>
+                <argument type="service" id="senegal.api.connector.field.doctrine"></argument>
+                <argument type="service" id="senegal.api.connector.field.propel"></argument>
+                <argument type="service" id="senegal.api.connector.field.data"></argument>
             </argument>
         </service>
     </services>

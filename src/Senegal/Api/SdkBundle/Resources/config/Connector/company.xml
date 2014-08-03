@@ -5,15 +5,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <!--<service id="pfd.connector.company.doctrine" class="Pfd\Sdk\Company\Connector\Doctrine\CompanyDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />-->
-        <service id="pfd.connector.company.propel" class="Pfd\Sdk\Company\Connector\Propel\CompanyPropelConnector" parent="pfd.abstract_connector.propel" public="false" />
-        <service id="pfd.connector.company.data" class="Pfd\Sdk\Company\Connector\Data\CompanyDataConnector" parent="pfd.abstract_connector.data" public="false" />
+        <!--<service id="senegal.api.connector.company.doctrine" class="Pfd\Sdk\Company\Connector\Doctrine\CompanyDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />-->
+        <service id="senegal.api.connector.company.propel" class="Pfd\Sdk\Company\Connector\Propel\CompanyPropelConnector" parent="senegal.api.abstract_connector.propel" public="false" />
+        <service id="senegal.api.connector.company.data" class="Pfd\Sdk\Company\Connector\Data\CompanyDataConnector" parent="senegal.api.abstract_connector.data" public="false" />
 
-        <service id="pfd.connector.company" class="Pfd\Sdk\Company\Connector\CompanyConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.company" class="Pfd\Sdk\Company\Connector\CompanyConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <!--<argument type="service" id="pfd.connector.company.doctrine"></argument>-->
-                <argument type="service" id="pfd.connector.company.propel"></argument>
-                <argument type="service" id="pfd.connector.company.data"></argument>
+                <!--<argument type="service" id="senegal.api.connector.company.doctrine"></argument>-->
+                <argument type="service" id="senegal.api.connector.company.propel"></argument>
+                <argument type="service" id="senegal.api.connector.company.data"></argument>
             </argument>
         </service>
     </services>

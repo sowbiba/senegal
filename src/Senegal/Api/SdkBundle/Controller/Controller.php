@@ -11,6 +11,6 @@ class Controller extends BaseController{
      */
     protected function getSdk($name)
     {
-        return $this->get('pfd.mediator.sdk')->getSdk($name);
+        return $this->get('senegal.api.mediator.sdk')->getSdk($name);
     }
 } 

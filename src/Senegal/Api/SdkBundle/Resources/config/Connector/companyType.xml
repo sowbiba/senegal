@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pfd.connector.companyType.webservice" class="Pfd\Sdk\CompanyType\Connector\Webservice\CompanyTypeWebserviceConnector" public="false" >
-            <argument type="service" id="pfd.client.espri"></argument>
+        <service id="senegal.api.connector.companyType.webservice" class="Pfd\Sdk\CompanyType\Connector\Webservice\CompanyTypeWebserviceConnector" public="false" >
+            <argument type="service" id="senegal.api.client.espri"></argument>
         </service>
 
-        <service id="pfd.connector.companyType" class="Pfd\Sdk\CompanyType\Connector\CompanyTypeConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.companyType" class="Pfd\Sdk\CompanyType\Connector\CompanyTypeConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <argument type="service" id="pfd.connector.companyType.webservice"></argument>
+                <argument type="service" id="senegal.api.connector.companyType.webservice"></argument>
             </argument>
         </service>
     </services>

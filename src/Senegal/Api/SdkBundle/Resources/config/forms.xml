@@ -18,7 +18,7 @@
          -->
 
         <service id="form.type.sdk" class="%pfd_sdk.form.type.sdk.class%">
-            <argument type="service" id="pfd.mediator.sdk" />
+            <argument type="service" id="senegal.api.mediator.sdk" />
             <argument type="service" id="property_accessor" />
             <tag name="form.type" alias="sdk_model" />
         </service>

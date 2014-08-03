@@ -7,22 +7,22 @@
     <parameters>
         <parameter key="sdk_user_provider.class">Senegal\Api\SdkBundle\Security\User\SdkUserProvider</parameter>
         <parameter key="legacy_password_encoder.class">Senegal\Api\SdkBundle\Security\Encoder\LegacyPasswordEncoder</parameter>
-        <parameter key="pfd.security.login_handler.class">Senegal\Api\SdkBundle\Security\Handler\LoginSuccessHandler</parameter>
-        <parameter key="pfd.security.logout_handler.class">Senegal\Api\SdkBundle\Security\Handler\LogoutSuccessHandler</parameter>
+        <parameter key="senegal.api.security.login_handler.class">Senegal\Api\SdkBundle\Security\Handler\LoginSuccessHandler</parameter>
+        <parameter key="senegal.api.security.logout_handler.class">Senegal\Api\SdkBundle\Security\Handler\LogoutSuccessHandler</parameter>
     </parameters>
 
     <services>
         <service id="sdk_user_provider" class="%sdk_user_provider.class%">
-            <argument type="service" id="pfd.sdk.user" />
-            <argument type="service" id="pfd.bridge" />
+            <argument type="service" id="senegal.api.sdk.user" />
+            <argument type="service" id="senegal.api.bridge" />
         </service>
 
-        <service id="pfd.security.login_handler" class="%pfd.security.login_handler.class%">
-            <argument type="service" id="pfd.bridge" />
+        <service id="senegal.api.security.login_handler" class="%senegal.api.security.login_handler.class%">
+            <argument type="service" id="senegal.api.bridge" />
         </service>
 
-        <service id="pfd.security.logout_handler" class="%pfd.security.logout_handler.class%">
-            <argument type="service" id="pfd.bridge" />
+        <service id="senegal.api.security.logout_handler" class="%senegal.api.security.logout_handler.class%">
+            <argument type="service" id="senegal.api.bridge" />
         </service>
 
         <service id="legacy_password_encoder" class="%legacy_password_encoder.class%" />

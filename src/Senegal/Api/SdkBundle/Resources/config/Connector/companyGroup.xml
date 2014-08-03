@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pfd.connector.companyGroup.doctrine" class="Pfd\Sdk\CompanyGroup\Connector\Doctrine\CompanyGroupDoctrineConnector" parent="pfd.abstract_connector.doctrine" public="false" />
-        <!--<service id="pfd.connector.companyGroup.propel" class="Pfd\Sdk\CompanyGroup\Connector\Propel\CompanyGroupPropelConnector" parent="pfd.abstract_connector.propel" public="false" />-->
+        <service id="senegal.api.connector.companyGroup.doctrine" class="Pfd\Sdk\CompanyGroup\Connector\Doctrine\CompanyGroupDoctrineConnector" parent="senegal.api.abstract_connector.doctrine" public="false" />
+        <!--<service id="senegal.api.connector.companyGroup.propel" class="Pfd\Sdk\CompanyGroup\Connector\Propel\CompanyGroupPropelConnector" parent="senegal.api.abstract_connector.propel" public="false" />-->
 
-        <service id="pfd.connector.companyGroup" class="Pfd\Sdk\CompanyGroup\Connector\CompanyGroupConnector" parent="pfd.abstract_connector" public="false">
+        <service id="senegal.api.connector.companyGroup" class="Pfd\Sdk\CompanyGroup\Connector\CompanyGroupConnector" parent="senegal.api.abstract_connector" public="false">
             <argument type="collection">
-                <argument type="service" id="pfd.connector.companyGroup.doctrine"></argument>
-                <!--<argument type="service" id="pfd.connector.companyGroup.propel"></argument>-->
+                <argument type="service" id="senegal.api.connector.companyGroup.doctrine"></argument>
+                <!--<argument type="service" id="senegal.api.connector.companyGroup.propel"></argument>-->
             </argument>
         </service>
     </services>
