@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="api_sdk.listener.uploadable" class="Api\SdkBundle\Listener\UploadableListener">
+            <tag name="api_sdk.event_listener" event="preCreate" />
+            <tag name="api_sdk.event_listener" event="preDelete" />
+            <tag name="api_sdk.event_listener" event="preUpdate" />
+            <argument type="service" id="api_sdk.tools.uploaded_file_slugifier"></argument>
+        </service>
+        <service id="api_sdk.listener.timestampable" class="Api\SdkBundle\Listener\TimestampableListener">
+            <tag name="api_sdk.event_listener" event="preCreate" />
+            <tag name="api_sdk.event_listener" event="preUpdate" />
+        </service>
+        <service id="api_sdk.listener.blameable" class="Api\SdkBundle\Listener\BlameableListener">
+            <tag name="api_sdk.event_listener" event="preCreate" />
+            <tag name="api_sdk.event_listener" event="preUpdate" />
+            <argument type="service" id="service_container"></argument>
+        </service>
+    </services>
+</container>

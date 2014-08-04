@@ -70,7 +70,7 @@ swiftmailer:
     spool:     { type: memory }
 
 # Sdk bundle configuration
-#pfd_sdk:
+#api_sdk:
 #  observer:
 #    root_dir: %observer_root_dir%
 

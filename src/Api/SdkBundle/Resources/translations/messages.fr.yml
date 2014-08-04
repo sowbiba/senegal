@@ -1,0 +1,17 @@
+# Messages thrown by Api\Sdk\SdkException
+
+#Api\Sdk\Contract\RevisionSdk
+Cannot clone not opened revision: Impossible de cloner une révision non ouverte
+Cannot clone a revision in pending publication: Impossible de cloner une révision en cours de publication
+Contract of revision has not published one: Le contrat de la révision n'a pas de révision publiée
+
+#Api\Sdk\Contract\ContractSdk
+The contract has an opened revision but not the parent chosen: Le contrat a une révision ouverte mais pas le contrat père choisi
+The contract and the parent chosen have opened revision: Le contrat et le père choisi ont une révision ouverte
+Product line of the contract is not same than parent chosen: Le contrat et le père choisi ne sont pas dans la même gamme
+The parent chosen has already a parent: Le contrat père choisi a déjà un père
+The contract has already a parent: Le contrat a déjà un père
+Contracts with revisionable productLine already inherits parent documents: La liaison des documents est automatique pour les contrats de gamme révisionnable
+Cannot inherit funds if contract dont have a parent: Les fonds ne peuvent être liés que si le contrat a un père
+Cannot inherit documents if contract dont have a parent: Les documents ne peuvent être liés que si le contrat a un père
+Cannot inherit chapters if contract dont have a parent: Les chapitres ne peuvent être hérités que si le contrat a un père

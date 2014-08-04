@@ -5,18 +5,18 @@ senegal_api_authentification:
 senegal_api_contracts:
     resource: "@ApiContractBundle/Resources/config/routing.yml"
     prefix:   /
-    
-senegal_api_sdk:
-    resource: "@SenegalApiSdkBundle/Resources/config/routing.yml"
-    prefix:   /
+#    
+#senegal_api_sdk:
+#    resource: "@ApiSdkBundle/Resources/config/routing.yml"
+#    prefix:   /
 
-#pfd_contracts:
+#api_contracts:
 #    type: rest
-#    resource: "@PfdContractBundle/Resources/config/routing.yml"
+#    resource: "@ApiContractBundle/Resources/config/routing.yml"
 #    prefix:   /
 #
-#pfd_authentication:
-#    resource: "@PfdAuthenticationBundle/Resources/config/routing.yml"
+#api_authentication:
+#    resource: "@ApiAuthenticationBundle/Resources/config/routing.yml"
 #    prefix:   /
 
 NelmioApiDocBundle:

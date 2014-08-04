@@ -1,0 +1,29 @@
+# Child contract of #5533
+Id: 5534
+ParentId: 5533
+ContratspereIdTpv: null
+ProductLineId: 5
+Name: 'ABICAPI'
+IsActive: true
+IsFuture: false
+currentId: null
+FutureEffectiveDate: null
+ActivatedAt: '2008-06-30 09:27:25'
+Notation: null
+CreatedAt: '2008-06-30 09:27:25'
+CreatedBy: 3260
+UpdatedAt: '2013-05-20 12:22:44'
+UpdatedBy: 5830
+UserUpdatedAt: '2013-04-16 00:00:00'
+UserUpdatedBy: 5830
+IsParent: false
+IsMarketed: true
+FormuleActive: true
+PlanName: null
+PlanNumber: null
+PlanTotalNumber: null
+ContratspereFonds: false
+ContratspereDocs: false
+FullName: 'ABICAPI'
+isParent: false
+hasParent: false

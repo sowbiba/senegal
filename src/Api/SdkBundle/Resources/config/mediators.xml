@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="api.mediator.sdk" class="Api\Sdk\Mediator\SdkMediator">
+            <call method="setColleagueList">
+                <argument key="colleagueList" type="collection">
+                    <argument type="service" id="api.sdk.document"></argument>
+                    <argument type="service" id="api.sdk.document_type"></argument>
+                    <argument type="service" id="api.sdk.user"></argument>
+                    <argument type="service" id="api.sdk.role"></argument>
+                </argument>
+            </call>
+            <argument type="service" id="logger"></argument>
+        </service>
+
+        <service id="api.mediator.connector" class="Api\Sdk\Mediator\ConnectorMediator">
+            <call method="setColleagueList">
+                <argument key="colleagueList" type="collection">
+                    <argument type="service" id="api.connector.document"></argument>
+                    <argument type="service" id="api.connector.user"></argument>
+                    <argument type="service" id="api.connector.role"></argument>
+                </argument>
+            </call>
+            <argument type="service" id="logger"></argument>
+        </service>
+    </services>
+</container>

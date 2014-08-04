@@ -1,5 +1,0 @@
-pfd_authentication_login_check:
-    pattern:  /login-check
-    defaults: { _controller: PfdAuthenticationBundle:Auth:loginCheck }
-    requirements:
-        _method:  POST

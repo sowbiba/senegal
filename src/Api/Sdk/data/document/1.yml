@@ -1,0 +1,15 @@
+id: 1
+type: { id: 1, name: Documentation commerciale}
+reference: test
+description: Document data connector
+size : 1000
+hasSize : true
+createdAt: 2013-06-30 12:58:59
+createdBy: 1
+updatedAt: 2013-06-30 12:58:59
+updatedBy: 1
+releasedAt: 2013-07-13 12:58:59
+releasedBy: 1
+contractId: 1
+revisionId: 1
+filePath: 'document1.ext'

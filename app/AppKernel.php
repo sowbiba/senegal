@@ -19,10 +19,9 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Senegal\Api\SdkBundle\SenegalApiSdkBundle(),
-            new Senegal\Api\Bundle\AuthenticationBundle\ApiAuthenticationBundle(),
-            new Senegal\Api\Bundle\ContractBundle\ApiContractBundle(),
-            //new Senegal\Api\Bundle\SenegalApiBundle(),
+            new Api\Bundle\AuthenticationBundle\ApiAuthenticationBundle(),
+            new Api\Bundle\ContractBundle\ApiContractBundle(),
+            new Api\SdkBundle\ApiSdkBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

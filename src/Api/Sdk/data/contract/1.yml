@@ -1,0 +1,32 @@
+#Contract with formula
+id: 1
+idTpv: null
+parentId: null
+contratspereIdTpv: null
+productLineId: 20
+name: 'CHORUS PREVOYANCE'
+isActive: true
+isFuture: true
+currentId: 25
+futureEffectiveDate: null
+activatedAt: '2007-10-03 07:31:58'
+notation: null
+createdAt: '2007-10-03 07:31:58'
+createdBy: 3263
+updatedAt: '2013-05-20 12:22:44'
+updatedBy: 7543
+userUpdatedAt: '2013-04-16 00:00:00'
+userUpdatedBy: 9369
+isParent: false
+isMarketed: false
+formuleActive: true
+planName: 'FORMULE UNIQUE (DECES + PTIA + IPT + EXO)'
+planNumber: 1
+planTotalNumber: 1
+planActive: 1
+contratspereFonds: false
+contratspereDocs: false
+fullName: 'CHORUS PREVOYANCE - FORMULE UNIQUE (DECES + PTIA + IPT + EXO) - 1/1'
+hasParent: false
+insurers:
+- { Id: 6, Validated: true, GroupesocietesId: 647, SocieteTypeId: 1, Name: 'AGF VIE', DistributionZone: null, IdTpv: null, IdCm: null, CreatedAt: '2007-10-02 17:50:08', CreatedBy: 3263, UpdatedAt: '2007-10-02 17:50:08', UpdatedBy: 3263 }

@@ -1,0 +1,8 @@
+contracts:
+    type:     rest
+    resource: Api\Bundle\ContractBundle\Controller\ContractController
+    prefix: /
+
+documents:
+    type:     rest
+    resource: Api\Bundle\ContractBundle\Controller\DocumentController

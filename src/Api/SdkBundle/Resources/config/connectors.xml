@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="Connector/document.xml"/>
+        <import resource="Connector/user.xml"/>
+        <import resource="Connector/role.xml"/>
+    </imports>
+
+    <parameters>
+        <parameter key="api.abstract_connector.class">Api\Sdk\Connector\AbstractConnector</parameter>
+        <parameter key="api.abstract_connector.webservice.class">Api\Sdk\Connector\AbstractWebserviceConnector</parameter>
+        <parameter key="api.abstract_connector.doctrine.class">Api\Sdk\Connector\AbstractDoctrineConnector</parameter>
+        <parameter key="api.abstract_connector.data.class">Api\Sdk\Connector\AbstractDataConnector</parameter>
+    </parameters>
+
+    <services>
+        <service id="api.abstract_connector" abstract="true" class="%api.abstract_connector.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"></argument>
+            </call>
+            <call method="setLogger">
+                <argument type="service" id="logger"></argument>
+            </call>
+        </service>
+
+        <service id="api.abstract_connector.webservice" class="%api.abstract_connector.webservice.class%" parent="api.abstract_connector">
+            <argument type="service" id="api.client.espri"></argument>
+        </service>
+
+        <service id="api.abstract_connector.doctrine" class="%api.abstract_connector.doctrine.class%" parent="api.abstract_connector">
+            <argument type="service" id="doctrine.orm.entity_manager"></argument>
+        </service>
+
+        <service id="api.abstract_connector.data" class="%api.abstract_connector.data.class%" parent="api.abstract_connector">
+            <argument></argument>
+        </service>
+    </services>
+</container>

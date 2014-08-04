@@ -1,7 +1,0 @@
-parameters:
-#    pfd_contract.example.class: Senegal\Api\ContractBundle\Example
-
-services:
-#    pfd_contract.example:
-#        class: %pfd_contract.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
