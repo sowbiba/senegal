@@ -28,7 +28,7 @@
         </service>
 
         <service id="api.abstract_connector.webservice" class="%api.abstract_connector.webservice.class%" parent="api.abstract_connector">
-            <argument type="service" id="api.client.espri"></argument>
+            <argument type="service" id="api.client.senegal"></argument>
         </service>
 
         <service id="api.abstract_connector.doctrine" class="%api.abstract_connector.doctrine.class%" parent="api.abstract_connector">

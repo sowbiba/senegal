@@ -12,15 +12,11 @@ parameters:
     locale:              fr
     secret:              testray
 
-    #session managment
-    observer_root_dir:   /path/to/observer_dir
-    observer_host:       http://observer.localhost
-
     #documents upload
     upload_dir:          /import/documents/
     upload_tmp_dir:      %kernel.root_dir%/../web/uploads/document/
     web_dir:             %kernel.root_dir%/../web/
 
-    espri_ws_url: 'http://espri.dev/ws/'
-    espri_ws_user: ???
-    espri_ws_password: ????
+    senegal_ws_url: 'http://senegal-api/ws/'
+    senegal_ws_user: ???
+    senegal_ws_password: ????

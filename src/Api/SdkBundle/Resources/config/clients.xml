@@ -9,13 +9,13 @@
     </parameters>
 
     <services>
-        <service id="api.client.espri" class="%api.client.class%">
-            <argument>%espri_ws_url%</argument>
+        <service id="api.client.senegal" class="%api.client.class%">
+            <argument>%senegal_ws_url%</argument>
             <argument type="collection">
                 <argument key="request.options" type="collection">
                     <argument key="auth" type="collection">
-                        <argument>%espri_ws_user%</argument>
-                        <argument>%espri_ws_password%</argument>
+                        <argument>%senegal_ws_user%</argument>
+                        <argument>%senegal_ws_password%</argument>
                     </argument>
                 </argument>
             </argument>
