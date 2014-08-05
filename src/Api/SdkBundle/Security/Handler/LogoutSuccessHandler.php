@@ -12,14 +12,8 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
  */
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
-    protected $bridge;
-
-    /**
-     * @param LegacyBridge $bridge
-     */
-    public function __construct(LegacyBridge $bridge)
+    public function __construct()
     {
-        $this->bridge = $bridge;
     }
 
     /**
@@ -29,9 +23,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
      */
     public function onLogoutSuccess(Request $request)
     {
-        $this->bridge->permissiveTransaction(function () {
-            \sfContext::getInstance()->getUser()->signOut();
-        });
+//        $this->bridge->permissiveTransaction(function () {
+//            \sfContext::getInstance()->getUser()->signOut();
+//        });
 
         return new RedirectResponse($request->getSession()->get('_security.profideo.target_path', '/'));
     }

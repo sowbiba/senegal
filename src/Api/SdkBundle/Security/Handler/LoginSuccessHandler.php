@@ -13,14 +13,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
-    protected $bridge;
 
     /**
      * @param LegacyBridge $bridge
      */
-    public function __construct(LegacyBridge $bridge)
+    public function __construct()
     {
-        $this->bridge = $bridge;
     }
 
     /**
@@ -31,10 +29,10 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        $this->bridge->permissiveTransaction(function () use ($token) {
-            $user = \sfGuardUserPeer::retrieveByPK($token->getUser()->getId());
-            \sfContext::getInstance()->getUser()->signIn($user);
-        });
+//        $this->bridge->permissiveTransaction(function () use ($token) {
+//            $user = \sfGuardUserPeer::retrieveByPK($token->getUser()->getId());
+//            \sfContext::getInstance()->getUser()->signIn($user);
+//        });
 
         return new RedirectResponse($request->getSession()->get('_security.profideo.target_path', '/'));
     }
