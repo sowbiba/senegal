@@ -21,17 +21,11 @@ class SdkUserProvider implements UserProviderInterface
     protected $sdk;
 
     /**
-     * @var \Api\Sdk\Bridge\LegacyBridge
-     */
-    protected $bridge;
-
-    /**
      * @param SdkInterface $sdk
      */
-    public function __construct(SdkInterface $sdk, LegacyBridge $bridge)
+    public function __construct(SdkInterface $sdk)
     {
         $this->sdk = $sdk;
-        $this->bridge = $bridge;
     }
 
     /**
@@ -70,10 +64,10 @@ class SdkUserProvider implements UserProviderInterface
         $refreshedUser = $this->loadUserByUsername($user->getUsername());
 
         // Ensure that the user is logged in the legacy
-        $this->bridge->permissiveTransaction(function () use ($refreshedUser) {
-            $user = \sfGuardUserPeer::retrieveByPK($refreshedUser->getId());
-            \sfContext::getInstance()->getUser()->signIn($user);
-        });
+//        $this->bridge->permissiveTransaction(function () use ($refreshedUser) {
+//            $user = \sfGuardUserPeer::retrieveByPK($refreshedUser->getId());
+//            \sfContext::getInstance()->getUser()->signIn($user);
+//        });
 
         return $refreshedUser;
     }
