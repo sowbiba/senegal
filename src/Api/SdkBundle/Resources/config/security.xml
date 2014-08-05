@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="sdk_user_provider.class">Api\SdkBundle\Security\User\SdkUserProvider</parameter>
-        <parameter key="legacy_password_encoder.class">Api\SdkBundle\Security\Encoder\LegacyPasswordEncoder</parameter>
+        <parameter key="api_password_encoder.class">Api\SdkBundle\Security\Encoder\LegacyPasswordEncoder</parameter>
         <parameter key="api.security.login_handler.class">Api\SdkBundle\Security\Handler\LoginSuccessHandler</parameter>
         <parameter key="api.security.logout_handler.class">Api\SdkBundle\Security\Handler\LogoutSuccessHandler</parameter>
     </parameters>
@@ -22,6 +22,6 @@
         <service id="api.security.logout_handler" class="%api.security.logout_handler.class%">
         </service>
 
-        <service id="legacy_password_encoder" class="%legacy_password_encoder.class%" />
+        <service id="api_password_encoder" class="%api_password_encoder.class%" />
     </services>
 </container>

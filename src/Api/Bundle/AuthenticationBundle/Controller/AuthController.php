@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\AuthenticationBundle\Controller;
+namespace Api\Bundle\AuthenticationBundle\Controller;
 
 use Api\Sdk\Model\User;
 use Api\SdkBundle\Security\Encoder\LegacyPasswordEncoder;
@@ -47,7 +47,7 @@ class AuthController extends Controller
             return new JsonResponse(array(), Response::HTTP_NOT_FOUND);
         }
         /** @var LegacyPasswordEncoder $encoder */
-        $encoder = $this->get("legacy_password_encoder");
+        $encoder = $this->get("api_password_encoder");
 
         if ($encoder->isPasswordValid($user->getPassword(), $request->get('password'), $user->getSalt())) {
             return new Response($this->get('jms_serializer')->serialize($user, "json"), Response::HTTP_OK, array('Content-Type' => 'application/json'));

@@ -3,6 +3,11 @@ contracts:
     resource: Api\Bundle\ContractBundle\Controller\ContractController
     prefix: /
 
+users:
+    type:     rest
+    resource: Api\Bundle\AuthenticationBundle\Controller\AuthController
+    prefix: /
+    
 documents:
     type:     rest
     resource: Api\Bundle\ContractBundle\Controller\DocumentController

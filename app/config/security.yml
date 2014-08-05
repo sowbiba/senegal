@@ -1,6 +1,11 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Api\Sdk\Model\User:
+            id: api_password_encoder
+
+    providers:
+        sdk:
+            id: sdk_user_provider
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

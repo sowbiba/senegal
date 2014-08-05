@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Api\Sdk\Model\User;
 use Api\SdkBundle\Entity\User as UserEntity;
 use Api\Sdk\Role\Query\RoleQuery;
+use Api\Sdk\User\Query\UserQuery;
 
 class UserDoctrineConnector extends AbstractDoctrineConnector
 {
@@ -91,5 +92,19 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
             $this->addRoles($user, $roles);
         }
 
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return array|null
+     */
+    public function getByUsername($username)
+    {
+        $query = new UserQuery(['username' => $username]);
+
+        $user = $this->getResult($query);
+        
+        return (null === $user) ? null : $this->convertUser($user);
     }
 }
