@@ -3,7 +3,6 @@
 namespace Api\SdkBundle\Security\User;
 
 use Api\Sdk\Model\User;
-use Api\Sdk\Bridge\LegacyBridge;
 use Api\Sdk\SdkInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -7,6 +7,18 @@ Api\SdkBundle\Entity\User:
     fields:
         username:
             type: string
+        firstname:
+            type: string
+        lastname:
+            type: string
+        email:
+            type: string
+        salt:
+            type: string
+        password:
+            type: string
+        active:
+            type: boolean
     manyToMany:
       roles:
           targetEntity: Role

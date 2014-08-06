@@ -46,7 +46,7 @@ class UserQuery implements QueryInterface
                     return $qb->expr()->in('u.id', $value);
                 },
             'username' => function (QueryBuilder $qb, $value) {
-                    return $qb->expr()->eq('u.username', $value);
+                    return $qb->expr()->eq('u.username', "'" . $value . "'");
                 },
             'password' => function (QueryBuilder $qb, $value) {
                     return $qb->expr()->eq('u.password', sha1($value));
@@ -59,6 +59,7 @@ class UserQuery implements QueryInterface
             }
         }
 
+        //var_dump($qb->getQuery()->getSQL());
         return $qb;
     }
 

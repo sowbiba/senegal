@@ -102,9 +102,8 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
     public function getByUsername($username)
     {
         $query = new UserQuery(['username' => $username]);
-
-        $user = $this->getResult($query);
+        $user = $this->getOne($query);
         
-        return (null === $user) ? null : $this->convertUser($user);
+        return (null === $user) ? null : $this->convert($user);
     }
 }

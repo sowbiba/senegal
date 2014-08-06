@@ -17,7 +17,7 @@ class AuthController extends Controller
     /**
      * @ApiDoc(
      *  resource=true,
-     *  description="Returns user informations if the given login/paswword combination is valid",
+     *  description="Returns user informations if the given login/password combination is valid",
      *   statusCodes={
      *         200="Returned when successful",
      *         404="Returned when login/password combination is invalid"
@@ -44,11 +44,14 @@ class AuthController extends Controller
             /** @var User $user */
             $user = $this->get('sdk_user_provider')->loadUserByUsername($request->get('login'));
         } catch (UsernameNotFoundException $e) {
-            return new JsonResponse(array(), Response::HTTP_NOT_FOUND);
+            return new JsonResponse(array($e->getMessage()), Response::HTTP_NOT_FOUND);
         }
         /** @var LegacyPasswordEncoder $encoder */
         $encoder = $this->get("api_password_encoder");
 
+        return json_encode($user);
+        return new Response($this->get('jms_serializer')->serialize($user, "json"), Response::HTTP_OK, array('Content-Type' => 'application/json'));
+        
         if ($encoder->isPasswordValid($user->getPassword(), $request->get('password'), $user->getSalt())) {
             return new Response($this->get('jms_serializer')->serialize($user, "json"), Response::HTTP_OK, array('Content-Type' => 'application/json'));
         } else {
