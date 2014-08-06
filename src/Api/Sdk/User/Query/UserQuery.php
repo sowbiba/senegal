@@ -59,7 +59,6 @@ class UserQuery implements QueryInterface
             }
         }
 
-        var_dump($qb);
         return $qb;
     }
 
