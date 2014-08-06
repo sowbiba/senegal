@@ -38,7 +38,7 @@ class AuthController extends Controller
      * @param  Request      $request
      * @return JsonResponse
      */
-    public function loginCheckAction(Request $request)
+    public function AdminLogin_CheckAction(Request $request)
     {
         try {
             /** @var User $user */
