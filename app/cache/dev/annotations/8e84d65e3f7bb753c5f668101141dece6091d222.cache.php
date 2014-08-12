@@ -1,1 +1,0 @@
-<?php return unserialize('a:2:{i:0;O:41:"JMS\\Serializer\\Annotation\\ExclusionPolicy":1:{s:6:"policy";s:3:"ALL";}i:1;O:39:"JMS\\Serializer\\Annotation\\AccessorOrder":2:{s:5:"order";s:6:"custom";s:6:"custom";a:6:{i:0;s:2:"id";i:1;s:8:"lastname";i:2;s:9:"firstname";i:3;s:5:"email";i:4;s:7:"company";i:5;s:5:"roles";}}}');
