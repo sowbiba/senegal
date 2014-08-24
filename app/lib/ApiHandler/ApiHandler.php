@@ -1,5 +1,5 @@
 <?php
-namespace ApiHandler;
+namespace ApiHandlers;
 /**
  * Singleton used to call Senegal API
  */
