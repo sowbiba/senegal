@@ -54,7 +54,7 @@ class ContractController extends ApiController
         /** @var Contract $contract */
         return $this->getSdk('document')->getDocumentTypes();
 
-        $query = new DocumentQuery(array('excludedTypes' => [17]));
+        $query = new DocumentQuery(array('excludedTypes' => array(17)));
 
         return $contract->getDocuments($query);
     }
@@ -81,7 +81,7 @@ class ContractController extends ApiController
             throw $this->createNotFoundException();
         }
 
-        $query = new DocumentQuery(array('excludedTypes' => [17]));
+        $query = new DocumentQuery(array('excludedTypes' => array(17)));
 
         return $contract->getDocuments($query);
     }

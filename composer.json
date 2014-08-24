@@ -14,8 +14,7 @@
     ],
   "autoload": {
     "psr-0": {
-      "": "src/",
-      "ApiHandler": "app/lib/ApiHandler/"
+      "": "src/"
     }
   },
   "require": {

@@ -1,4 +1,0 @@
-services:
-    senegal.api.service:
-        class:        ApiHandler\ApiHandler
-        arguments:    ["%local_urls_api%"]
