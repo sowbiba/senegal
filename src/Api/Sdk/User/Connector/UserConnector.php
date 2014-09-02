@@ -11,6 +11,11 @@ use Api\Sdk\Model\User;
 
 class UserConnector extends AbstractConnector
 {
+    public function getAllUsers()
+    {
+        return $this->getConnectorToUse("getAllUsers")->getAllUsers();
+    }
+
     /**
      * @param string $username
      *

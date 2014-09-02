@@ -1,3 +1,7 @@
+api_user:
+    resource: "@ApiUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 senegal_api_authentification:
     resource: "@ApiAuthenticationBundle/Resources/config/routing.yml"
     prefix:   /

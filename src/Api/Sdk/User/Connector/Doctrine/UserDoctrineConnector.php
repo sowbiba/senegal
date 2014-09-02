@@ -8,6 +8,7 @@ use Api\Sdk\Model\User;
 use Api\SdkBundle\Entity\User as UserEntity;
 use Api\Sdk\Role\Query\RoleQuery;
 use Api\Sdk\User\Query\UserQuery;
+use Api\Sdk\Query\QueryInterface;
 
 class UserDoctrineConnector extends AbstractDoctrineConnector
 {
@@ -20,6 +21,22 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
         parent::__construct($em);
 
         $this->setRepository('User');
+    }
+
+    /**
+     * Gets the users matching the given query
+     *
+     * @param QueryInterface $query
+     *
+     * @return array|User
+     */
+    public function getCollection(QueryInterface $query)
+    {
+        $usersEntity = $this->getResult($query);
+
+        return array_map(function ($userEntity) {
+            return $this->convert($userEntity);
+        }, $usersEntity);
     }
 
     /**
@@ -92,6 +109,13 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
             $this->addRoles($user, $roles);
         }
 
+    }
+    
+    public function getAllUsers()
+    {
+        $query = new UserQuery();
+        return $this->getCollection($query);
+        ////return $this->get
     }
 
     /**

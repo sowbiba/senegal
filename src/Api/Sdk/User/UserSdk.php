@@ -38,6 +38,17 @@ class UserSdk extends AbstractSdk implements SdkInterface
 
         return empty($userData) ? null : new User($this, $userData);
     }
+    
+    /**
+     * Returns all users
+     *
+     *
+     * @return Array
+     */
+    public function getAllUsers()
+    {
+        return $this->connector->getAllUsers();
+    }
 
     /**
      * Returns user matching the given username
