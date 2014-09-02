@@ -4,6 +4,8 @@ namespace Api\SdkBundle\Security\Handler;
 
 use Api\Sdk\Bridge\LegacyBridge;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
+use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler;
+use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -11,14 +13,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * Class LoginSuccessHandler
  */
-class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
+class LoginSuccessHandler extends DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
-
-    /**
-     * @param LegacyBridge $bridge
-     */
-    public function __construct()
+    public function __construct(HttpUtils $httpUtils, array $options)
     {
+        $options = array_merge(array(
+            'default_target_path'            => '/admin',
+            'login_path'                     => '/admin/login',
+        ), $options);
+
+        parent::__construct($httpUtils, $options);
     }
 
     /**
@@ -34,6 +38,6 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 //            \sfContext::getInstance()->getUser()->signIn($user);
 //        });
 
-        return new RedirectResponse($request->getSession()->get('_security.profideo.target_path', '/'));
+        return parent::onAuthenticationSuccess($request, $token);
     }
 }
