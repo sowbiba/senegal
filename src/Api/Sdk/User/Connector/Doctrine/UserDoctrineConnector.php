@@ -24,6 +24,16 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
     }
 
     /**
+     * @param int $id
+     *
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        return $this->getOne($id);
+    }
+
+    /**
      * Gets the users matching the given query
      *
      * @param QueryInterface $query

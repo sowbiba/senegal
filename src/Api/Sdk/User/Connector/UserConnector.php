@@ -139,7 +139,7 @@ class UserConnector extends AbstractConnector
      */
     public function getById($id)
     {
-        return $this->getMediator()->getColleague('userPropel')->getById($id);
+        return $this->getConnectorToUse("getById")->getById($id);
     }
 
 }
