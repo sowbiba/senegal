@@ -63,7 +63,7 @@ class UserConnector extends AbstractConnector
     private function convertPermissionsToRoles(Array $user)
     {
         foreach ($user['roles'] as $key => $permission) {
-            $user['roles'][$key] = 'ROLE_'.strtoupper($permission['name']);
+            $user['roles'][$key] = 'ROLE_'.strtoupper($permission);
         }
 
         return $user;

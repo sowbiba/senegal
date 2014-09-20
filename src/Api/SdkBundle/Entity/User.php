@@ -241,6 +241,19 @@ class User extends BaseEntity
     {
         $this->roles = $roles;
     }
+    /**
+     *
+     * @return array 
+     */
+    public function getAllPermissions()
+    {
+        $permissions = array();
+        $roles = $this->getRoles();
+        foreach($roles as $role) {
+            array_push($permissions, $role->getName());
+        }
+        return $permissions;
+    }
     
     /**
      * @param boolean $active

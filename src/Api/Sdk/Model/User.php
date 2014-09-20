@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation\AccessorOrder;
 /**
  * Class User
  * @ExclusionPolicy("all")
- * @AccessorOrder("custom", custom ={"id", "lastname", "firstname", "email", "company", "roles"})
+ * @AccessorOrder("custom", custom ={"id", "username", "lastname", "firstname", "email", "roles"})
  */
 class User extends BaseModel implements UserInterface, EquatableInterface, \Serializable
 {
@@ -39,6 +39,7 @@ class User extends BaseModel implements UserInterface, EquatableInterface, \Seri
 
     /**
      * @var string
+     * @Expose
      */
     protected $username;
 
@@ -63,17 +64,6 @@ class User extends BaseModel implements UserInterface, EquatableInterface, \Seri
      * @expose
      */
     protected $roles = array();
-
-    /**
-     * @var integer
-     */
-    protected $type;
-
-    /**
-     * @var string
-     * @Expose
-     */
-    protected $company;
 
     /**
      * @var boolean
@@ -216,38 +206,6 @@ class User extends BaseModel implements UserInterface, EquatableInterface, \Seri
     public function getRoles()
     {
         return array_unique($this->roles);
-    }
-
-    /**
-     * @param int $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $company
-     */
-    public function setCompany($company)
-    {
-        $this->company = $company;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCompany()
-    {
-        return $this->company;
     }
 
     /**

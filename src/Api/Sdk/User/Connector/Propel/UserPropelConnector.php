@@ -24,20 +24,20 @@ class UserPropelConnector extends AbstractPropelConnector
 
         return (null === $user) ? null : $this->convertUser($user);
     }
-
-    /**
-     * @param string $username
-     *
-     * @return array|null
-     */
-    public function getByUsername($username)
-    {
-        $user = $this->getBridge()->permissiveTransaction(function () use ($username) {
-            return \sfGuardUserPeer::retrieveByUsername($username);
-        });
-
-        return (null === $user) ? null : $this->convertUser($user);
-    }
+//
+//    /**
+//     * @param string $username
+//     *
+//     * @return array|null
+//     */
+//    public function getByUsername($username)
+//    {
+//        $user = $this->getBridge()->permissiveTransaction(function () use ($username) {
+//            return \sfGuardUserPeer::retrieveByUsername($username);
+//        });
+//
+//        return (null === $user) ? null : $this->convertUser($user);
+//    }
 
     /**
      * @param string $email

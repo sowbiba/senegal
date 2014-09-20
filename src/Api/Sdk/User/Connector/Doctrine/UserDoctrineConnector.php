@@ -138,6 +138,31 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
         $query = new UserQuery(['username' => $username]);
         $user = $this->getOne($query);
         
-        return (null === $user) ? null : $this->convert($user);
+        //return $user;
+        return (null === $user) ? null : $this->convertUser($user);
+    }
+    
+    
+    
+    /**
+     * Convert legacy users in an array
+     *
+     * @param UserEntity $user
+     *
+     * @return array
+     */
+    public function convertUser(UserEntity $user)
+    {
+        return [
+            'id'            => $user->getId(),
+            'username'      => $user->getUsername(),
+            'firstname'     => $user->getFirstname(),
+            'lastname'      => $user->getLastname(),
+            'email'         => $user->getEmail(),
+            'roles'         => $user->getAllPermissions(),
+            'salt'          => $user->getSalt(),
+            'password'      => $user->getPassword(),
+            'active'        => $user->isActive(),
+        ];
     }
 }
