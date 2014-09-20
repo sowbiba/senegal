@@ -36,7 +36,8 @@ class UserSdk extends AbstractSdk implements SdkInterface
 
         $userData = $this->connector->getById($userId);
 
-        return empty($userData) ? null : new User($this, $userData);
+        //return empty($userData) ? null : new User($this, $userData);
+        return empty($userData) ? null : $userData;
     }
     
     /**

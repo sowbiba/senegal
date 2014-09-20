@@ -17,7 +17,7 @@
         </service>
 
         <service id="api.security.login_handler" class="%api.security.login_handler.class%">
-            <argument type="service" id="security.http_utils" />
+<!--            <argument type="service" id="security.http_utils" />-->
             <argument type="collection" /> <!-- Options -->
         </service>
 

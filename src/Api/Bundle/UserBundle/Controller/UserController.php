@@ -53,18 +53,14 @@ class UserController extends Controller
      * @ApiDoc(
      *  resource=true,
      *  description="user login"
-     *  requirements={
-     *          "name"="password",
-     *          "dataType"="string",
-     *          "description"="user password"
-     *  }
      * )
      *
-     * @param  Request      $request
+     * @param  $id
      * @return JsonResponse
      */
-    public function userSaveAction(Request $request)
+    public function saveUserAction($id)
     {
+        return json_encode("AHHH");
         return json_encode($request);
     }
 }

@@ -56,6 +56,7 @@ class User extends BaseModel implements UserInterface, EquatableInterface, \Seri
 
     /**
      * @var string
+     * @Expose
      */
     protected $password;
 
@@ -67,6 +68,7 @@ class User extends BaseModel implements UserInterface, EquatableInterface, \Seri
 
     /**
      * @var boolean
+     * @Expose
      */
     protected $active;
 
