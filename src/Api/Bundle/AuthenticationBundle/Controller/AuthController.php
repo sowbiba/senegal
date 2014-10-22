@@ -52,8 +52,10 @@ class AuthController extends Controller
         return new Response($this->get('jms_serializer')->serialize($user, "json"), Response::HTTP_OK, array('Content-Type' => 'application/json'));
         
         if ($encoder->isPasswordValid($user->getPassword(), $request->get('password'), $user->getSalt())) {
+            var_dump("ICI");
             return new Response($this->get('jms_serializer')->serialize($user, "json"), Response::HTTP_OK, array('Content-Type' => 'application/json'));
         } else {
+            var_dump("ICI2");
             return new JsonResponse(array(), Response::HTTP_NOT_FOUND);
         }
     }

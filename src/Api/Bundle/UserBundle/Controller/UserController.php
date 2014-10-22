@@ -3,6 +3,7 @@
 namespace Api\Bundle\UserBundle\Controller;
 
 use Api\SdkBundle\Controller\Controller;
+use Api\Sdk\Model\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -52,14 +53,20 @@ class UserController extends Controller
     /**
      * @ApiDoc(
      *  resource=true,
-     *  description="user login"
+     *  description="user login",
+     *  input={
+     *      "class"="Api\Sdk\Model\User",
+     *      "groups"={"update", "public"}
+     *   }
      * )
      *
      * @param  $id
      * @return JsonResponse
      */
-    public function saveUserAction($id)
+    public function saveUserAction(User $user)
     {
+        error_log($user);
+        error_log("ON EST LA");
         return json_encode("AHHH");
         return json_encode($request);
     }

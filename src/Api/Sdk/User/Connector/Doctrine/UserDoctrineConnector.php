@@ -165,4 +165,20 @@ class UserDoctrineConnector extends AbstractDoctrineConnector
             'active'        => $user->isActive(),
         ];
     }
+    
+    
+    public function updateValues(User $user)
+    {
+        try {
+            // Update the revision entity to flush eventual listeners
+            $entity = $this->repository->find($user->getId());
+            $entity->populate($user->toArray());
+            $this->em->persist($entity);
+            $this->em->flush();
+        } catch(Exception $e) {
+            var_dump($e->getMessage());
+            return false;
+        }
+        return true;
+    }
 }

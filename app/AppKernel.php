@@ -19,10 +19,22 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Api\Bundle\AuthenticationBundle\ApiAuthenticationBundle(),
             new Api\Bundle\ContractBundle\ApiContractBundle(),
             new Api\SdkBundle\ApiSdkBundle(),
+            
+            
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            
+            new Api\Bundle\AuthenticationBundle\ApiAuthenticationBundle(),
             new Api\Bundle\UserBundle\ApiUserBundle(),
+            new Senegal\ToolsBundle\SenegalToolsBundle(),
+            new Senegal\UserBundle\SenegalUserBundle(),
+            new Senegal\LayoutBundle\SenegalLayoutBundle(),
+            new Senegal\AdminBundle\SenegalAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

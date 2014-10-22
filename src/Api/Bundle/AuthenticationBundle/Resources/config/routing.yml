@@ -1,5 +1,5 @@
 login_check:
-    pattern:  /admin/login-check
+    pattern:  /admin/login_check
     defaults: { _controller: ApiAuthenticationBundle:Auth:AdminLogin_Check }
     requirements:
         _method:  POST

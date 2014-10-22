@@ -36,7 +36,7 @@ class UserSdk extends AbstractSdk implements SdkInterface
 
         $userData = $this->connector->getById($userId);
 
-        //return empty($userData) ? null : new User($this, $userData);
+        return empty($userData) ? null : new User($this, $userData);
         return empty($userData) ? null : $userData;
     }
     
@@ -162,5 +162,18 @@ class UserSdk extends AbstractSdk implements SdkInterface
     public function setRoles(User $user, array $roles, array $scopes)
     {
         $this->connector->setRoles($user, $roles, $scopes);
+    }
+    
+    public function updateValues(User $user)
+    {
+        if (0 == (int)$user->getId()) {
+            throw new \BadMethodCallException(__METHOD__ . "(): Wrong parameter, user id must be an integer!!!");
+        }
+        
+        if(!$this->connector->updateValues($user)) {
+            return false;
+        }
+        
+        return true;
     }
 }

@@ -1,28 +1,35 @@
+###########
+### API ###
+###########
+
 api_user:
     resource: "@ApiUserBundle/Resources/config/routing.yml"
-    prefix:   /
 
 senegal_api_authentification:
     resource: "@ApiAuthenticationBundle/Resources/config/routing.yml"
-    prefix:   /
 
 senegal_api_contracts:
     resource: "@ApiContractBundle/Resources/config/routing.yml"
-    prefix:   /
-#    
-#senegal_api_sdk:
-#    resource: "@ApiSdkBundle/Resources/config/routing.yml"
-#    prefix:   /
-
-#api_contracts:
-#    type: rest
-#    resource: "@ApiContractBundle/Resources/config/routing.yml"
-#    prefix:   /
-#
-#api_authentication:
-#    resource: "@ApiAuthenticationBundle/Resources/config/routing.yml"
-#    prefix:   /
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+    
+    
+    
+    
+#####################
+### SENEGAL ADMIN ###
+#####################
+
+senegal_admin:
+    resource: "@SenegalAdminBundle/Resources/config/routing.yml"
+
+senegal_layout:
+    resource: "@SenegalLayoutBundle/Resources/config/routing.yml"
+
+senegal_user:
+    resource: "@SenegalUserBundle/Resources/config/routing.yml"
+
+senegal_tools:
+    resource: "@SenegalToolsBundle/Resources/config/routing.yml"

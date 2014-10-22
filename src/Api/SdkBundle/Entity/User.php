@@ -22,6 +22,40 @@ class User extends BaseEntity
     protected $username;
 
     /**
+     * @var string
+     * @Expose
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     * @Expose
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     * @Expose
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $salt;
+
+    /**
+     * @var string
+     * @Expose
+     */
+    protected $password;
+    
+    /**
+     * @var boolean
+     */
+    protected $active;
+
+    /**
      *
      * @var Api\SdkBundle\Entity\Role
      */
@@ -114,43 +148,6 @@ class User extends BaseEntity
     {
         return "users";
     }
-    
-    
-    
-    
-    
-    /**
-     * @var string
-     * @Expose
-     */
-    protected $firstname;
-
-    /**
-     * @var string
-     * @Expose
-     */
-    protected $lastname;
-
-    /**
-     * @var string
-     * @Expose
-     */
-    protected $email;
-
-    /**
-     * @var string
-     */
-    protected $salt;
-
-    /**
-     * @var string
-     */
-    protected $password;
-    
-    /**
-     * @var boolean
-     */
-    protected $active;
 
     /**
      * @param string $firstname

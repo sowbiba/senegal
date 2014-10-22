@@ -21,18 +21,26 @@
     "php": ">=5.3.3",
     "symfony/symfony": "~2.4",
     "doctrine/orm": "~2.2,>=2.2.3",
+    "doctrine/migrations": "1.0.*@dev",
+    "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
     "doctrine/doctrine-bundle": "~1.2",
     "twig/extensions": "~1.0",
     "symfony/assetic-bundle": "~2.3",
     "symfony/swiftmailer-bundle": "~2.3",
     "symfony/monolog-bundle": "~2.4",
+    "jms/security-extra-bundle": "1.5.*",
     "sensio/distribution-bundle": "~3.0",
     "sensio/framework-extra-bundle": "~3.0",
     "sensio/generator-bundle": "~2.3",
     "incenteev/composer-parameter-handler": "~2.0",
     "nelmio/api-doc-bundle": "@stable",
     "jms/serializer-bundle": "@stable",
-    "friendsofsymfony/rest-bundle": "@stable"
+    "friendsofsymfony/rest-bundle": "@stable",
+    "oyejorge/less.php": "dev-master",
+    "blueimp/jquery-file-upload": "9.2.*",
+    "ornicar/gravatar-bundle": "1.*",
+    "illuminate/filesystem": "@stable",
+    "oyejorge/less.php": "dev-master"
   },
 
   "require-dev": {

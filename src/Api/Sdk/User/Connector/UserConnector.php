@@ -141,5 +141,10 @@ class UserConnector extends AbstractConnector
     {
         return $this->getConnectorToUse("getById")->getById($id);
     }
+    
+    public function updateValues(User $user)
+    {
+        return $this->getConnectorToUse("updateValues")->updateValues($user);
+    }
 
 }
