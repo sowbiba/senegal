@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Doctrine\ORM\EntityRepository;
 
 class UserType extends AbstractType
 {
@@ -109,13 +110,17 @@ class UserType extends AbstractType
             ->add('roles', 'entity', 
                 array(
                      'label'    => 'Roles',
-                     'class'    => 'Api\Sdk\Model\Role',
+                     'class'    => 'Api\SdkBundle\Entity\Role',
                      'property' => 'name',
                      'multiple' => true,
+                     'expanded' => true,
+                     'query_builder' => function(EntityRepository $er) {
+                         return $er->createQueryBuilder('r');
+                     },
                      //'order_by' => 'name',
                      //'choices'  => $user->getRoles(),
                      //'data'     => $options['data']->getRoles(),
-                     'attr'     => array('class' => 'col-12 filter-type form-control')
+                     'attr'     => array('class' => 'col-12 filter-type')
                     )
             )
             ->add('id', 'hidden')

@@ -47,7 +47,13 @@
             <div>
             {{ form_label(form.roles) }}
             <div class="col-md-4">
-                {{ form_widget(form.roles) }}
+                {% for role in form.roles %}
+                    <div class="form-row clearfix">
+                        <span class="checkbox-inline">{{ form_widget(role) }}</span>
+                        <span class="checkbox-inline checkbox">{{ form_label(role) }}</span>
+                    </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>

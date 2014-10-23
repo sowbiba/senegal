@@ -3,7 +3,9 @@
 namespace Api\Sdk\Model;
 
 /**
- * User role
+ * Class User
+ * @ExclusionPolicy("all")
+ * @AccessorOrder("custom", custom ={"id", "name", "description"})
  */
 class Role extends BaseModel
 {
