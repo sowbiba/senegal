@@ -1,0 +1,14 @@
+services:
+    apikey_user_provider:
+        class: Senegal\ApiBundle\Security\ApiKeyUserProvider
+        arguments:
+            - @senegal_user_manager
+
+    apikey_authenticator:
+        class: Senegal\ApiBundle\Security\ApiKeyAuthenticator
+        arguments:
+            - @apikey_user_provider
+            - @security.http_utils
+
+    senegal_password_encoder:
+        class: Senegal\ApiBundle\Security\PasswordEncoder

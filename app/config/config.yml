@@ -1,12 +1,14 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: databases.yml }
     - { resource: security.yml }
-#    - { resource: services.yml }
+    - { resource: services.yml }
+
+parameters:
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -16,7 +18,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
+        assets_version: v1
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -30,20 +32,134 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        translation_domain : %translation_domain%
+        back_role_classes: %back_role_classes%
+    form:
+        resources:
+          - 'Form/bootstrap_3_layout.html.twig'
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
+    use_controller: true
+    bundles:
+        - SenegalApiBundle
+        - TwigBundle
     filters:
         cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        yui_css:
-            #jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
-            jar:  /usr/share/yui-compressor/yui-compressor.jar
+        less:
+            node: %node_bin_path%
+            node_paths: %node_module_path%
+    assets:
+        fontawesome_css:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/less/font-awesome.less
+            filters:
+              - less
+              - cssrewrite
+            output: css/fontawesome.css
+        fontawesome_font1:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/fonts/FontAwesome.otf
+            output: fonts/FontAwesome.otf
+        fontawesome_font2:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/fonts/fontawesome-webfont.eot
+            output: fonts/fontawesome-webfont.eot
+        fontawesome_font3:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/fonts/fontawesome-webfont.svg
+            output: fonts/fontawesome-webfont.svg
+        fontawesome_font4:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/fonts/fontawesome-webfont.ttf
+            output: fonts/fontawesome-webfont.ttf
+        fontawesome_font5:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/fontawesome/fonts/fontawesome-webfont.woff
+            output: fonts/fontawesome-webfont.woff
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../src/Senegal/BackBundle/Resources/less/vendor/bootswatch/bootswatch.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/transition.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/alert.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/button.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/carousel.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/collapse.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/dropdown.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/modal.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/tooltip.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/popover.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/scrollspy.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/tab.js
+                - %kernel.root_dir%/Resources/lib/bootstrap/js/affix.js
+            output: js/bootstrap.js
+        bootstrap_font1:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/bootstrap/fonts/glyphicons-halflings-regular.eot
+            output: fonts/glyphicons-halflings-regular.eot
+        bootstrap_font2:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/bootstrap/fonts/glyphicons-halflings-regular.svg
+            output: fonts/glyphicons-halflings-regular.svg
+        bootstrap_font3:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf
+            output: fonts/glyphicons-halflings-regular.ttf
+        bootstrap_font4:
+            inputs:
+              - %kernel.root_dir%/Resources/lib/bootstrap/fonts/glyphicons-halflings-regular.woff
+            output: fonts/glyphicons-halflings-regular.woff
+        jquery:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/jquery/dist/jquery.js
+            output: js/jquery.js
+        bootstrap_datepicker_js:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-datepicker/js/bootstrap-datepicker.js
+                - %kernel.root_dir%/Resources/lib/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js
+            output: js/bootstrap-datepicker.js
+        bootstrap_switch_js:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-switch/dist/js/bootstrap-switch.js
+            output: js/bootstrap-switch.js
+        bootstrap_multiselect_js:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js
+            output: js/bootstrap-multiselect.js
+        bootstrap_datepicker_css:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-datepicker/build/build_standalone3.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap-datepicker.css
+        bootstrap_switch_css:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-switch/src/less/bootstrap3/build.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap-switch.css
+        bootstrap_multiselect_css:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/bootstrap-multiselect/dist/less/bootstrap-multiselect.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap-multiselect.css
+        jquery_checkboxes_js:
+            inputs:
+                - %kernel.root_dir%/Resources/lib/checkboxes.js/src/jquery.checkboxes.js
+            output: js/jquery.checkboxes.
+
 
 # Doctrine Configuration
 doctrine:
@@ -55,13 +171,23 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -71,18 +197,27 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# Sdk bundle configuration
-#api_sdk:
-#  observer:
-#    root_dir: %observer_root_dir%
-
 # NelmioApiDoc Configuration
-nelmio_api_doc: ~
+nelmio_api_doc:
+    sandbox:
+        authentication:
+            name: api-key
+            delivery: header
+            custom_endpoint: false
 
+stof_doctrine_extensions:
+    default_locale: %locale%
+    persist_default_translation: true
+    orm:
+        default:
+            blameable: true
+            timestampable: true
+            softdeleteable: true
+            sortable: true
 
 jms_serializer:
-  metadata:
-    auto_detection: true
+    metadata:
+        auto_detection: true
 
 fos_rest:
     param_fetcher_listener: true
@@ -93,26 +228,19 @@ fos_rest:
         formats:
             xml: true
             json : true
-            html: false
-        templating_formats:
             html: true
+        templating_formats:
+            html: false
         force_redirects:
             html: false
         failed_validation: HTTP_BAD_REQUEST
         default_engine: twig
     routing_loader:
         default_format: json
+        include_format: false
+    serializer:
+        serialize_null: false
+
 sensio_framework_extra:
     view:
         annotations: false
-
-ornicar_gravatar:
-    rating: g
-    size: 42
-    default: mm
-
-doctrine_migrations:
-    dir_name: %kernel.root_dir%/DoctrineMigrations
-    namespace: Senegal\Migrations
-    table_name: migration_versions
-    name: Senegal Migrations

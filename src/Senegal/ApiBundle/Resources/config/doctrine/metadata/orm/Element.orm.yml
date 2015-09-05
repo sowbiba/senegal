@@ -1,0 +1,35 @@
+Element:
+    type: entity
+    manyToOne:
+        typeElement:
+          targetEntity: TypeElement
+          inversedBy: elements
+          joinColumn:
+            name: type_element_id
+            referencedColumnName: id
+    table: element
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeElementId:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: type_element_id
+        content:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+        legend:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+    lifecycleCallbacks: {  }

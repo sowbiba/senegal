@@ -1,0 +1,37 @@
+ForfaitHasTypePage:
+    type: entity
+    oneToOne:
+        forfait:
+          targetEntity: Forfait
+          inversedBy: forfaitTypePages
+          joinColumn:
+            name: forfait_id
+            referencedColumnName: id
+    manyToOne:
+        typePage:
+          targetEntity: TypePage
+          inversedBy: typePageForfaits
+          joinColumn:
+            name: type_page_id
+            referencedColumnName: id
+    table: forfait_has_type_page
+    id:
+        forfaitId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: forfait_id
+        typePageId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: type_page_id
+    fields:
+        allowedPageNumber:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: allowed_page_number
+    lifecycleCallbacks: {  }

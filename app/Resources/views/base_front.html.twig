@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block container %}
+    <div id="content_container" class="{% block container_class %}container{% endblock container_class %}">
+
+        <div class="content">
+            {% block page_header %}
+                <div class="header">
+                    <div class="page-header">
+                        <h1>{% block headline %}Sénégal{% endblock headline %}</h1>
+                    </div>
+
+                    {% block header_actions %}{% endblock header_actions %}
+                </div>
+            {% endblock page_header %}
+
+            {% block flash %}
+                {% include 'Form/flash_messages.html.twig' %}
+            {% endblock flash %}
+
+            {% block content_row %}
+                {% block content %}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% block content_content %}{% endblock content_content %}
+                        </div>
+                    </div>
+                {% endblock content %}
+            {% endblock content_row %}
+        </div>
+
+        <footer>
+            {% block footer %}{% endblock footer %}
+        </footer>
+    </div>
+{% endblock container %}

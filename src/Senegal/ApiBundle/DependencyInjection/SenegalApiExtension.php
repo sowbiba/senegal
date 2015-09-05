@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader;
 class SenegalApiExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {

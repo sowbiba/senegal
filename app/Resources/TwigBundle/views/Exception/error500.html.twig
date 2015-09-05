@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block bodyAttributes %} class="error-page"{% endblock bodyAttributes %}
+
+{% block header %}{% endblock %}
+{% block page_header %}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+
+    {% stylesheets combine=true output="css/errors.css" filter='less,cssrewrite'
+        '@SenegalBackBundle/Resources/less/error-pages.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <section class="content col-12">
+        <div class="error-content clearfix">
+            <div class="error-img error500"></div>
+            <div class="error-txt error-500">
+                <h1>Désolé, nous n’arrivons pas à répondre à votre requête</h1>
+
+                <h2>En général, cela signifie qu’une erreur inattendue s’est produite durant l'exécution de la requête. Vous pouvez :</h2>
+                <ul>
+                    <li><a href="{{ app.request.uri }}" class="tip-bottom" title="Rafraîchir la page">Rafraîchir la page</a> la page, le problème est peut être temporaire</li>
+                    <li>Si le problème persiste, faire une demande auprès du service informatique</li>
+                </ul>
+                <p class="links"><a href="{{ path('pfd_broadcast_back_homepage') }}" class="tip-left" title="Retour à la page d’accueil">Retour à la page d’accueil</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

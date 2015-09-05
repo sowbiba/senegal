@@ -1,7 +1,5 @@
-parameters:
-#    senegal_api.example.class: Senegal\ApiBundle\Example
-
-services:
-#    senegal_api.example:
-#        class: %senegal_api.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+imports:
+    - { resource: "Security/services.yml" }
+    - { resource: "User/services.yml" }
+    - { resource: "Forfait/services.yml" }
+    - { resource: "TypePage/services.yml" }

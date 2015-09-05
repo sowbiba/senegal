@@ -1,0 +1,36 @@
+PageHasBlock:
+    type: entity
+    manyToOne:
+        page:
+          targetEntity: Page
+          inversedBy: pageBlocks
+          joinColumn:
+            name: page_id
+            referencedColumnName: id
+        block:
+          targetEntity: Block
+          inversedBy: blockPages
+          joinColumn:
+            name: block_id
+            referencedColumnName: id
+    table: page_has_block
+    id:
+        pageId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: page_id
+        blockId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: block_id
+    fields:
+        position:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,41 @@
+parameters:
+    senegal.forfait.entity.class: Senegal\ApiBundle\Entity\Forfait
+    senegal.forfait_type_page.entity.class: Senegal\ApiBundle\Entity\ForfaitHasTypePage
+
+services:
+    senegal_forfait_repository:
+        class: Senegal\ApiBundle\Repository\ForfaitRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - SenegalApiBundle:Forfait
+        public: false
+
+    senegal_forfait_manager:
+        class: Senegal\ApiBundle\Manager\ForfaitManager
+        arguments:
+                - @doctrine.orm.entity_manager
+                - %senegal.forfait.entity.class%
+                - @validator
+                - @jms_serializer
+                - @senegal_forfait_event_subscriber
+
+    senegal_forfait_type_page_manager:
+        class: Senegal\ApiBundle\Manager\ForfaitTypePageManager
+        arguments:
+                - @doctrine.orm.entity_manager
+                - %senegal.forfait_type_page.entity.class%
+                - @validator
+                - @jms_serializer
+
+    senegal_forfait_event_subscriber:
+        class: Senegal\ApiBundle\Event\Forfait\ForfaitManagerSubscriber
+        arguments:
+            - @service_container
+
+    senegal_forfait_listener:
+        class: Senegal\ApiBundle\Listener\Entity\ForfaitListener
+        arguments:
+            - @service_container
+        tags:
+            - { name: doctrine.orm.entity_listener }

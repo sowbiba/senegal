@@ -1,0 +1,34 @@
+Block:
+    type: entity
+    manyToOne:
+        typeBlock:
+          targetEntity: TypeBlock
+          inversedBy: blocks
+          joinColumn:
+            name: type_block_id
+            referencedColumnName: id
+    table: block
+    uniqueConstraints:
+        block_name_unique:
+            columns:
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        typeBlockId:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: type_block_id
+    lifecycleCallbacks: {  }

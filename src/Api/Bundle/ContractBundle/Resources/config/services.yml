@@ -1,7 +1,0 @@
-parameters:
-#    api_contract.example.class: Api\ContractBundle\Example
-
-services:
-#    api_contract.example:
-#        class: %api_contract.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

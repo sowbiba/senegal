@@ -1,0 +1,39 @@
+parameters:
+    senegal.role.entity.class: Senegal\ApiBundle\Entity\Role
+    senegal.user.entity.class: Senegal\ApiBundle\Entity\User
+
+services:
+    senegal_user_repository:
+        class: Senegal\ApiBundle\Repository\UserRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - SenegalApiBundle:User
+        public: false
+
+    senegal_user_manager:
+        class: Senegal\ApiBundle\Manager\UserManager
+        arguments:
+                - @doctrine.orm.entity_manager
+                - %senegal.user.entity.class%
+                - @validator
+                - @jms_serializer
+                - @senegal_user_event_subscriber
+
+    senegal_user_event_subscriber:
+        class: Senegal\ApiBundle\Event\User\UserManagerSubscriber
+        arguments:
+            - @service_container
+
+    senegal_role_manager:
+        class: Senegal\ApiBundle\Manager\RoleManager
+        arguments:
+                - @doctrine.orm.entity_manager
+                - %senegal.role.entity.class%
+
+    senegal_user_listener:
+        class: Senegal\ApiBundle\Listener\Entity\UserListener
+        arguments:
+            - @service_container
+        tags:
+            - { name: doctrine.orm.entity_listener }

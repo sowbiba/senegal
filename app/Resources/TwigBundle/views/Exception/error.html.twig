@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block bodyAttributes %} class="error-page"{% endblock bodyAttributes %}
+
+{% block header %}{% endblock %}
+{% block page_header %}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+
+    {% stylesheets combine=true output="css/errors.css" filter='less,cssrewrite'
+    '@SenegalBackBundle/Resources/less/error-pages.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <section class="content col-lg-12">
+        <div class="error-illu-box">
+            <span class="err-keep">Keep calm</span>
+            <span class="err-and">and</span>
+            <span class="err-go-back"><a href="#" onclick="history.go(-1); return false;" class="tip-top" title="Retour">go back</a></span>
+            <span class="err-to-the">to the</span>
+            <span class="err-home"><a href="{{ path('pfd_broadcast_back_homepage') }}"  class="tip-top" title="Page d'accueil">Homepage</a></span>
+        </div>
+
+         <div class="error-code-content">
+            <span class="code-text">{{ status_code }} {{ status_text }}</span>
+         </div>
+    </section>
+{% endblock %}

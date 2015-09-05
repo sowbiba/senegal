@@ -1,0 +1,24 @@
+<div id="{{ confirmId }}" class="modal form-confirm text-left" role="dialog" aria-labelledby="labelledBy-popin-confirm" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{ form_start(form, {'action': action, 'attr': {'class': 'form-inline'}}) }}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <p class="h4 modal-title" id="labelledBy-popin-confirm">
+                    {{ title|default('Merci de confirmer') }}
+                </p>
+            </div>
+            <div class="modal-body">
+                {% if message is not empty %}<p>{{ message|raw }}</p>{% endif %}
+                {% for field in form.children %}
+                    <div class="text-center">{{ form_row(field) }}</div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{{ cancel|default('Non') }}</button>
+                <button type="submit" class="btn btn-danger">{{ submit|default('Oui') }}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

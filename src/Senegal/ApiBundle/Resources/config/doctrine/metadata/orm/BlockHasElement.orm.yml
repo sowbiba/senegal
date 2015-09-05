@@ -1,0 +1,36 @@
+BlockHasElement:
+    type: entity
+    manyToOne:
+        block:
+          targetEntity: Block
+          inversedBy: blockElements
+          joinColumn:
+            name: block_id
+            referencedColumnName: id
+        element:
+          targetEntity: Element
+          inversedBy: elementBlocks
+          joinColumn:
+            name: element_id
+            referencedColumnName: id
+    table: block_has_element
+    id:
+        blockId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: block_id
+        elementId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: element_id
+    fields:
+        position:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+    lifecycleCallbacks: {  }

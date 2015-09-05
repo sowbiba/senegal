@@ -1,3 +1,0 @@
-senegal_admin_homepage:
-    path:     /admin
-    defaults: { _controller: SenegalAdminBundle:Admin:index }

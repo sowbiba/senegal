@@ -1,0 +1,30 @@
+TypeElement:
+    type: entity
+    oneToMany:
+        features:
+          targetEntity: Element
+          mappedBy: elements
+    oneToMany:
+        typeElementBlocks:
+          targetEntity: BlockHasElement
+          mappedBy: blocks
+    table: type_element
+    uniqueConstraints:
+        type_element_name_unique:
+            columns:
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    lifecycleCallbacks: {  }

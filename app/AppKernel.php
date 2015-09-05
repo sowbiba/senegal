@@ -15,29 +15,17 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Api\Bundle\ContractBundle\ApiContractBundle(),
-            new Api\SdkBundle\ApiSdkBundle(),
-            
-            
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new JMS\AopBundle\JMSAopBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-            
-            new Api\Bundle\AuthenticationBundle\ApiAuthenticationBundle(),
-            new Api\Bundle\UserBundle\ApiUserBundle(),
-            new Senegal\ToolsBundle\SenegalToolsBundle(),
-            new Senegal\UserBundle\SenegalUserBundle(),
-            new Senegal\LayoutBundle\SenegalLayoutBundle(),
-            new Senegal\AdminBundle\SenegalAdminBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Senegal\ApiBundle\SenegalApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

@@ -1,0 +1,32 @@
+parameters:
+    senegal.type_page.entity.class: Senegal\ApiBundle\Entity\TypePage
+
+services:
+    senegal_type_page_repository:
+        class: Senegal\ApiBundle\Repository\TypePageRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - SenegalApiBundle:TypePage
+        public: false
+
+    senegal_type_page_manager:
+        class: Senegal\ApiBundle\Manager\TypePageManager
+        arguments:
+                - @doctrine.orm.entity_manager
+                - %senegal.type_page.entity.class%
+                - @validator
+                - @jms_serializer
+                - @senegal_type_page_event_subscriber
+
+    senegal_type_page_event_subscriber:
+        class: Senegal\ApiBundle\Event\TypePage\TypePageManagerSubscriber
+        arguments:
+            - @service_container
+
+    senegal_type_page_listener:
+        class: Senegal\ApiBundle\Listener\Entity\TypePageListener
+        arguments:
+            - @service_container
+        tags:
+            - { name: doctrine.orm.entity_listener }

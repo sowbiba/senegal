@@ -1,22 +1,33 @@
+# This file is a "template" of what your parameters.yml file should look like
 parameters:
-    mailer_transport: smtp
-    mailer_host: smtp.gmail.com
-    mailer_user: noreply@profideo.com
-    mailer_password: testray
-    mailer_port: 465
-    mailer_encryption: ssl
-    mailer_auth: login
-    mailer_delivery_address: exploitation@profideo.com
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
 
-    #symfony conf
-    locale:              fr
-    secret:              testray
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
 
-    #documents upload
-    upload_dir:          /import/documents/
-    upload_tmp_dir:      %kernel.root_dir%/../web/uploads/document/
-    web_dir:             %kernel.root_dir%/../web/
+    locale:            en
 
-    senegal_ws_url: 'http://senegal-api/ws/'
-    senegal_ws_user: ???
-    senegal_ws_password: ????
+    debug_toolbar:     true
+    debug_redirects:   false
+    use_assetic_controller: false
+    node_bin_path: /usr/local/bin/node
+    node_module_path:
+        - /usr/local/lib/node_modules
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    translation_domain: back
+    api_base_url: http://senegal.dev/api/
+    back_role_classes:
+      - ADMIN: success
+      - SUPER_ADMIN: info

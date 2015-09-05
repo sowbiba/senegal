@@ -15,7 +15,7 @@ class MigrationVersions
     /**
      * @var string
      *
-     * @ORM\Column(name="version", type="string", length=255)
+     * @ORM\Column(name="version", type="string", length=255, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

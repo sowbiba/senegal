@@ -1,3 +1,23 @@
-senegal_api_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: SenegalApiBundle:Default:index }
+authentication:
+    type: rest
+    resource: Senegal\ApiBundle\Controller\AuthenticationController
+    prefix: /
+    defaults: {_format: json}
+
+role:
+    type: rest
+    resource: Senegal\ApiBundle\Controller\RoleController
+    prefix: /
+    defaults: {_format: json}
+
+user:
+    type: rest
+    resource: Senegal\ApiBundle\Controller\UserController
+    prefix: /
+    defaults: {_format: json}
+
+forfait:
+    type: rest
+    resource: Senegal\ApiBundle\Controller\ForfaitController
+    prefix: /
+    defaults: {_format: json}

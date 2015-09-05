@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block bodyAttributes %} class="error-page"{% endblock bodyAttributes %}
+
+{% block header %}{% endblock %}
+{% block page_header %}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+
+    {% stylesheets combine=true output="css/errors.css" filter='less,cssrewrite'
+    '@SenegalBackBundle/Resources/less/error-pages.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content_content %}
+    {{ parent() }}
+
+    <section class="content col-12">
+        <div class="error-content clearfix">
+            <div class="error-img error500"></div>
+            <div class="error-txt error-500">
+                <h1>Désolé, la page que vous demandez est verrouillée</h1>
+                <br>
+                <p class="links"><a href="{{ path('pfd_broadcast_back_homepage') }}" class="tip-left" title="Retour à la page d’accueil">Retour à la page d’accueil</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
