@@ -1,0 +1,114 @@
+{% extends "SenegalBackBundle::layout.html.twig" %}
+
+{% set menu_active = 'users' %}
+
+{% trans_default_domain translation_domain %}
+
+{#{% form_theme filter_form 'bootstrap_3_layout.html.twig' %}#}
+
+{% block container_class %}{{ parent() }} list_users {% endblock container_class %}
+
+{% block headline %}{{ 'list'|trans({}, 'back_users') }}{% endblock headline %}
+
+{% block header_actions %}
+    {#<button type="button" title="Afficher/Cacher le formulaire de recherche" class="filter-button tip-bottom btn {% if app.request.query.has('filter_close') %} btn-primary{% else %} btn-default{% endif %}">#}
+        {#<i class="fa fa-search"></i> {{ 'search'|trans }}#}
+    {#</button>#}
+
+    {#<a class="tip-bottom btn btn-primary" title="Créer un nouvel utilisateur" href="{{ path('pfd_broadcast_back_users_create') }}">#}
+        {#<i class="fa fa-user"></i> {{ 'create'|trans({}, 'back_users') }}#}
+    {#</a>#}
+
+    {#<a class="tip-bottom btn btn-primary" title="Exporter la liste filtrée d'utilisateurs" href="{{ path('pfd_broadcast_back_users_export', app.request.query.all) }}">#}
+        {#<i class="fa fa-download"></i> {{ 'export'|trans({}, 'back_users') }}#}
+    {#</a>#}
+{% endblock header_actions %}
+
+{% block content_body %}
+    <p class="h4">{{ 'results'|transchoice(users.getTotalItemCount) }}</p>
+
+    <div class="row col-xs-9">
+        {% if (users|length > 0) %}
+            <table class="table table-condensed table-bordered table-back">
+                <thead>
+                    <tr>
+                        <th class="boolean{% if users.isSorted('active') %} sorted{% endif %}">{{ knp_pagination_sortable(users, 'Actif', 'active', {}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th{% if users.isSorted('username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Identifiant', 'username', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="{% if users.isSorted('firstname') %} sorted{% endif %}">{{ knp_pagination_sortable(users, 'Prénom', 'firstname', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="{% if users.isSorted('lastname') %} sorted{% endif %}">{{ knp_pagination_sortable(users, 'Nom', 'lastname', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="{% if users.isSorted('email') %} sorted{% endif %}">{{ knp_pagination_sortable(users, 'Email', 'email', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="{% if users.isSorted('role') %} sorted{% endif %}">{{ knp_pagination_sortable(users, 'Rôle', 'role', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="tip-top{% if users.isSorted('createdAt') %} sorted{% endif %}" title="Date de création">{{ knp_pagination_sortable(users, 'Date de création', 'createdAt', {'icon': 'fa fa-calendar', 'type': 'amount'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="actions form-flow-actions"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% if user is not null %}
+                        {% if user.role is defined and user.role|length>0 and user.role.name is defined %}
+                            {% set user_role = user.role.name|trans({}, 'back_users') %}
+                        {% endif %}
+
+                    <tr class="{% if back_role_classes[user.role.name] is defined %}{{ back_role_classes[user.role.name] }}{% endif %}">
+                        <td class="boolean"><input type="checkbox" title="Activer/Désactiver cet utilisateur" data-action="checkbox-switch" data-callback="changeUserActivationStatus" data-url="{{ path('senegal_back_users_change_activation_status', {'userId': user.id}) }}" {% if user.active is defined and user.active %} checked {% endif %}></td>
+                        <td>{{ user.username }}</td>
+                        <td>{% if user.firstname is defined %}{{ user.firstname }}{% endif %}</td>
+                        <td>{% if user.lastname is defined %}{{ user.lastname }}{% endif %}</td>
+                        <td>{% if user.email is defined %}{{ user.email }}{% endif %}</td>
+                        <td>{{ user_role|raw }}</td>
+                        <td>{% if user.createdAt is defined %}{{ user.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td class="actions form-flow-actions">
+                            <a title="{{ 'edit'|trans({}, 'back_users') }}" class="tip-bottom list_edit" href="{{ path('senegal_back_users_edit', {'userId': user.id}) }}">
+                                <i class="fa fa-2x fa-pencil-square-o"></i>
+                            </a>
+                            <a title="{{ 'delete'|trans({}, 'back_users') }}" class="tip-bottom list_delete" href="#">
+                                <i class="fa fa-2x fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="navigation">
+                {{ knp_pagination_render(users, 'SenegalBackBundle:Templating:sliding.html.twig') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="list-filter well col-xs-3 pull-right"{% if app.request.query.has('filter_close') %} style="display: none;"{% endif %}>
+        <div class="margin-bottom-70">
+            <a href="{{ path('senegal_back_users_create') }}">
+                <button class="btn btn-primary">{{ 'create'|trans({}, 'back_users') }}</button>
+            </a>
+        </div>
+        <div>
+            {{ form_start(filter_form, {'action': url('senegal_back_users_list'), 'attr': {'novalidate': 'novalidate'}}) }}
+
+            <div class="">
+                {{ form_row(filter_form.active, {'attr': {'class': 'multiselect', 'data-multiselect-no-filtering': 'true'}}) }}
+                {{ form_row(filter_form.roleId, {'attr': {'class': 'multiselect'}}) }}
+                {{ form_row(filter_form.username) }}
+                {{ form_row(filter_form.lastname) }}
+                {{ form_row(filter_form.firstname) }}
+                {{ form_row(filter_form.email) }}
+            </div>
+            <div class="margin-top-5">
+                <div class="center-block no-float">
+                    <a href="{{ path('senegal_back_users_list') }}" title="Supprimer tous vos critères de recherche" class="tip-bottom btn btn-danger pull-left">
+                        <i class="glyphicon glyphicon-share-alt"></i> {{ 'reset'|trans }}
+                    </a>
+                </div>
+                <div class="center-block no-float">
+                    <button type="submit" class="tip-bottom btn btn-primary pull-right" title="Rechercher avec vos critères">
+                        <i class="glyphicon glyphicon-search"></i> {{ 'search_submit'|trans }}
+                    </button>
+                </div>
+            </div>
+
+            {{ form_end(filter_form) }}
+        </div>
+    </div>
+{% endblock content_body %}

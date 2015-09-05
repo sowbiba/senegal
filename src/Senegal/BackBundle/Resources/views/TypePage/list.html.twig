@@ -1,0 +1,58 @@
+{% extends "SenegalBackBundle::layout.html.twig" %}
+
+{% set menu_active = 'type_pages' %}
+
+{% trans_default_domain translation_domain %}
+
+{% block container_class %}{{ parent() }} list_forfaits {% endblock container_class %}
+
+{% block headline %}{{ 'list'|trans({}, 'back_type_pages') }}{% endblock headline %}
+
+{% block content_body %}
+    <p class="h4">{{ 'results'|transchoice(typePages.getTotalItemCount) }}</p>
+
+    <div class="row col-xs-9">
+        {% if (typePages|length > 0) %}
+            <table class="table table-condensed table-bordered table-back">
+                <thead>
+                    <tr>
+                        <th{% if typePages.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(typePages, 'Identifiant', 'name', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        {#<th class="tip-top{% if typePages.isSorted('createdAt') %} sorted{% endif %}" title="Date de création">{{ knp_pagination_sortable(typePages, 'Date de création', 'createdAt', {'icon': 'fa fa-calendar', 'type': 'amount'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>#}
+                        <th class="actions form-flow-actions"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for typePage in typePages %}
+                    {% if typePage is not null %}
+                    <tr class="">
+                        <td>{{ typePage.name }}</td>
+                        {#<td>{% if typePage.createdAt is defined %}{{ typePage.createdAt|date('d/m/Y') }}{% endif %}</td>#}
+                        <td class="actions form-flow-actions">
+                            <a title="{{ 'edit'|trans({}, 'back_type_pages') }}" class="tip-bottom list_edit" href="{{ path('senegal_back_type_page_edit', {'typePageId': typePage.id}) }}">
+                                <i class="fa fa-2x fa-pencil-square-o"></i>
+                            </a>
+                            <a data-confirm="{{ 'messages.confirm_delete'|trans({}, 'back_type_pages')|raw }}" title="{{ 'delete'|trans({}, 'back_type_pages') }}" class="btn-red tip-bottom" href="{{ path('senegal_back_type_page_delete', {'typePageId': typePage.id}) }}">
+                                <i class="fa fa-2x fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="navigation">
+                {{ knp_pagination_render(typePages, 'SenegalBackBundle:Templating:sliding.html.twig') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="list-filter well col-xs-3 pull-right"{% if app.request.query.has('filter_close') %} style="display: none;"{% endif %}>
+        <div class="margin-bottom-70">
+            <a href="{{ path('senegal_back_type_page_create') }}">
+                <button class="btn btn-primary">{{ 'create'|trans({}, 'back_type_pages') }}</button>
+            </a>
+        </div>
+    </div>
+{% endblock content_body %}

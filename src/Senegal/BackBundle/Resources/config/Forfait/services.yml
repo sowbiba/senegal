@@ -1,0 +1,37 @@
+parameters:
+  senegal.forfait.form.type.class: Senegal\BackBundle\Form\Type\ForfaitType
+  senegal.forfait.form.handler.class: Senegal\BackBundle\Form\Handler\ForfaitHandler
+  senegal.forfait.form.handler.options:
+    - 'back_forfaits'
+    - 'forfait.messages.create_success'
+    - 'forfait.messages.update_success'
+
+services:
+    senegal.forfait.form.handler:
+        class: %senegal.forfait.form.handler.class%
+        scope: request
+        arguments:
+            - @senegal.forfait.form
+            - @request_stack
+            - @templating
+            - @session
+            - @translator
+            - @senegal_api_handler
+            - @security.token_storage
+            - %senegal.forfait.form.handler.options%
+
+    senegal.forfait.form.type:
+        class: %senegal.forfait.form.type.class%
+        tags:
+            - { name: form.type, alias: forfait }
+        arguments:
+            - @senegal_api_handler
+            - @security.token_storage
+            - @security.context
+
+    senegal.forfait.form:
+        class: Symfony\Component\Form\Form
+        factory_service: form.factory
+        factory_method: create
+        arguments:
+            - @senegal.forfait.form.type

@@ -1,0 +1,57 @@
+{% extends "SenegalBackBundle::layout.html.twig" %}
+
+{% trans_default_domain translation_domain %}
+
+{% set menu_active = 'type_pages' %}
+
+{% block container_class %}{{ parent() }} edit_type_page{% endblock container_class %}
+
+{% block headline %}
+    {{ 'edit'|trans({}, 'back_type_pages') }} :
+    {% if form.vars.value.firstName is defined %}{{ form.vars.value.firstName }}{% endif %}
+    {% if form.vars.value.name is defined %}{{ form.vars.value.name }}{% endif %}
+{% endblock headline %}
+
+{% block header_actions %}
+    <a href="{{ path('senegal_back_type_pages_list') }}" class="btn btn-danger margin-top-30">
+        <i class="fa fa-list"></i>
+        Retour à la liste
+    </a>
+{% endblock header_actions %}
+
+{% block content_body %}
+    {{ form_start(form, {'action': url('senegal_back_type_page_edit', {'typePageId': app.request.get('typePageId')}), 'attr': {'novalidate': 'novalidate', 'data-form-notification-exit': 'true'}}) }}
+
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <fieldset>
+                    <legend>{{ 'form_legends.identity'|trans({}, 'back_type_pages') }}</legend>
+
+                    {{ form_row(form.name) }}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="margin-top-30">
+        <div class="well clearfix">
+            <button type="submit" name="update_and_edit" class="btn btn-primary" data-disable-after-click="true">
+                <i class="fa fa-save"></i>
+                {{ 'form.update_and_edit'|trans }}
+            </button>
+            <button type="submit" name="update_and_list" class="btn btn-primary" data-disable-after-click="true">
+                <i class="fa fa-save"></i>
+                <i class="fa fa-list"></i>
+                {{ 'form.update_and_list'|trans }}
+            </button>
+            {{ 'form.or'|trans }}
+            <a href="{{ path('senegal_back_type_pages_list') }}" class="btn btn-danger">
+                <i class="fa fa-share"></i>
+                {{ 'form.cancel'|trans }}
+            </a>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock content_body %}

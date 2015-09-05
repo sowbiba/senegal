@@ -1,0 +1,34 @@
+list: Liste des forfaits
+create: Nouveau forfait
+edit: Editer le forfait
+export: Export
+
+created_at: Date de création
+
+form_legends:
+    connexion: Informations de connexion
+    forfait: Mon abonnement
+    identity: Identité
+form_labels:
+    cancel: Retourner à l'étape précédente
+    identification_validate_and_next_step: Valider et aller à l'étape suivante
+
+    username: Identifiant
+    password: Mot de passe
+    email: Email
+    firstname: Prénom
+    lastname: Nom
+    address: Adresse
+    phone: Numéro de téléphone
+    name: Nom du forfait
+
+    forfait: Choisissez votre offre
+forfait:
+    fields:
+      empty:
+        name: "Le champ <strong>Nom du forfait</strong> est obligatoire."
+      duplicate:
+        name: "Le <strong>nom de forfait</strong> renseigné existe déjà."
+    messages:
+        create_success: "Le forfait a bien été créé."
+        update_success: "Le forfait a bien été modifié."

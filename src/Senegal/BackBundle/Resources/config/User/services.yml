@@ -1,0 +1,52 @@
+parameters:
+    senegal.user.form.type.class: Senegal\BackBundle\Form\Type\UserType
+    senegal.users_filter.form.type.class: Senegal\BackBundle\Form\Type\UserFilterType
+    senegal.user.form.handler.class: Senegal\BackBundle\Form\Handler\UserHandler
+    senegal.user.form.handler.options:
+            - 'back_users'
+            - 'user.messages.create_success'
+            - 'user.messages.update_success'
+
+services:
+    senegal.user.form.handler:
+        class: %senegal.user.form.handler.class%
+        scope: request
+        arguments:
+            - @senegal.user.form
+            - @request_stack
+            - @templating
+            - @session
+            - @translator
+            - @senegal_api_handler
+            - @security.token_storage
+            - %senegal.user.form.handler.options%
+
+    senegal.user.form.type:
+        class: %senegal.user.form.type.class%
+        tags:
+            - { name: form.type, alias: user }
+        arguments:
+            - @senegal_api_handler
+            - @security.token_storage
+            - @security.context
+
+    senegal.user.form:
+        class: Symfony\Component\Form\Form
+        factory_service: form.factory
+        factory_method: create
+        arguments:
+            - @senegal.user.form.type
+
+    senegal.user_filter.form.type:
+            class: %senegal.users_filter.form.type.class%
+            tags:
+                - { name: form.type, alias: user_filter }
+            arguments:
+                - @senegal_api_handler
+
+    senegal.user_filter.form:
+            class: Symfony\Component\Form\Form
+            factory_service: form.factory
+            factory_method: create
+            arguments:
+                - @senegal.user_filter.form.type

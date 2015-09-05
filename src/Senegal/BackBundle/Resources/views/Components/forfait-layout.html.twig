@@ -1,0 +1,6 @@
+{% extends "::Form/bootstrap_3_layout.html.twig" %}
+
+{% block form_widget %}
+    {% embed 'SenegalBackBundle:Components:forfaitTypePagePrototype.html.twig' with {'form': form} %}{% endembed %}
+{% endblock form_widget %}
+

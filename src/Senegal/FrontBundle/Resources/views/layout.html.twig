@@ -1,0 +1,68 @@
+{% extends "::base_front.html.twig" %}
+
+{% trans_default_domain translation_domain %}
+
+{% block head_style %}
+    {{ parent() }}
+
+    {% stylesheets combine=true output="css/front-layout.css" filter='less,cssrewrite'
+    '@SenegalFrontBundle/Resources/less/senegal-front.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-switch.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css">
+{% endblock %}
+
+{#{% block header '' %} &#123;&#35; enelever en cas de besoin d'une pub en haut de page par exemple &#35;&#125;#}
+{% block page_header '' %} {# pas besoin de headline #}
+{% block flash '' %}
+
+{% block headline %}Backend Sénégal{% endblock headline %}
+
+{% block foot_script %}
+    {{ parent() }}
+
+    <script src="/js/bootstrap-switch.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/bootstrap-multiselect.js"></script>
+    <script src="/js/jquery.checkboxes.js"></script>
+    {% javascripts
+    'bundles/bazingajstranslation/js/translator.min.js'
+    'js/translations/config.js'
+    'js/translations/*/*.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {# Specific for Front #}
+    {% javascripts
+    '@SenegalFrontBundle/Resources/public/javascripts/account_creation.sliding.form.js'
+    output='js/main.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block navbar %}
+    {% trans_default_domain translation_domain %}
+    {% block menu %}
+        {% embed 'SenegalFrontBundle:Components:menu.html.twig' with { 'menu_active': 1 } %}{% endembed %}
+    {% endblock %}
+{% endblock navbar %}
+
+{% block content %}
+    <section class="content col-xs-12">
+        <div class="row">
+            {% block content_menu %}{% endblock content_menu %}
+
+            {% block content_body %}{% endblock content_body %}
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock footer %}

@@ -1,0 +1,28 @@
+list: Liste des modèles de page
+create: Nouveau modèle de page
+edit: Editer le modèle de page
+delete: Supprimer le modèle de page
+export: Export
+
+created_at: Date de création
+
+form_legends:
+    identity: Identité
+form_labels:
+    name: Nom du modèle
+form_empty_value:
+    type_page: Choisissez un modèle
+type_pages:
+    fields:
+      empty:
+        name: "Le champ <strong>Nom du modèle</strong> est obligatoire."
+      duplicate:
+        name: "Le <strong>nom de modèle</strong> renseigné existe déjà."
+    messages:
+        create_success: "Le modèle de page a bien été créé."
+        update_success: "Le modèle de page a bien été modifié."
+messages:
+    confirm_delete: "ATTENTION, Le modèle de page sera supprimé.<br>Veillez à délier celui-ci de tous les forfaits actifs/utilisés.<br><br>Cette opération est irréversible, êtes-vous sûr de vouloir poursuivre la suppression?"
+    delete_success: "Le modèle de page a bien été supprimé"
+    delete_fail: "Une erreur est survenue lors de la suppression. Merci de contacter un administrateur"
+

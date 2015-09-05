@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="well col-xs-12">
+        <fieldset>
+            <legend>{{ 'form_legends.connexion'|trans({}, 'front_account') }}</legend>
+
+            {{ form_row(form.identification.username) }}
+            {{ form_row(form.identification.password) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="well col-xs-12">
+        <fieldset>
+            <legend>{{ 'form_legends.identity'|trans({}, 'front_account') }}</legend>
+
+            {{ form_row(form.identification.email) }}
+            {{ form_row(form.identification.firstname) }}
+            {{ form_row(form.identification.lastname) }}
+            {{ form_row(form.identification.address) }}
+            {{ form_row(form.identification.phone) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="well col-xs-12 navigation">
+        <div class="col-xs-5 pull-left clearfix navigation-previous">
+            <a href="{{ path('senegal_back_users_list') }}" class="btn btn-warning">
+                <i class="fa fa-reply margin-right-10"></i>
+                {{ 'form_labels.cancel'|trans({}, 'front_account') }}
+            </a>
+        </div>
+        <div class="col-xs-5 pull-right navigation-next">
+            <a href="#" name="identification_validate_and_next_step" class="btn btn-success pull-right" data-disable-after-click="true">
+                <i class="fa fa-chevron-right margin-right-10"></i>
+                {{ 'form_labels.identification_validate_and_next_step'|trans({}, 'front_account') }}
+            </a>
+
+        </div>
+    </div>
+</div>

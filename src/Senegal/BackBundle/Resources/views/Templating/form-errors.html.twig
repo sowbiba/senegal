@@ -1,0 +1,31 @@
+{% if errors is defined and translateDomain is defined %}
+    <ul>
+    {% for error in errors %}
+        {% set arguments = [] %}
+
+        {% if error.message is not defined and error is iterable %}
+            {% for err in error %}
+                <li>
+                    {% for key, er in err %}
+                        {% if key not in ['message', 'property_path'] %}
+                            {% set arguments = arguments|merge({('%'~key~'%'): er}) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {{ err.message|trans(arguments, translateDomain)|raw }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>
+                {% if error.arguments is defined %}
+                    {% for key, argument in error.arguments %}
+                        {% set arguments = arguments|merge({('%'~key~'%'): argument}) %}
+                    {% endfor %}
+                {% endif %}
+
+                {{ error.message|trans(arguments, translateDomain)|raw }}
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}

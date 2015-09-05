@@ -1,0 +1,49 @@
+list: Liste des utilisateurs
+create: Nouvel utilisateur
+edit: Editer l'utilisateur
+export: Export
+
+created_by: Créé par
+created_at: Date de création
+
+agence: Utilisateur Front
+USER: Utilisateur
+ACCOUNT_ADMIN: Administrateur de compte
+SUPER_ADMIN: Administrateur du Backend
+
+form_legends:
+    login: Identifiants
+    setting: Paramétrage
+    profile: Profil de l'utilisateur
+form_labels:
+    mail: Email
+    username: Identifiant
+    password: Mot de passe
+    active: Utilisateur actif
+    role: Rôle
+    lastname: Nom
+    firstname: Prénom
+    phone: Téléphone
+    address: Adresse
+form_empty_value:
+    role: Choisissez un rôle
+    group: Choisissez un groupe
+messages:
+    user_activated: "L'utilisateur a bien été activé."
+    user_disabled: "L'utilisateur a bien été désactivé."
+    user_receiveMail_activated: "L'utilisateur est maintenant destinataire des mails de gestion."
+    user_receiveMail_disabled: "L'utilisateur n'est plus destinataire des mails de gestion."
+user:
+    fields:
+      not_valid:
+        email: "L'adresse email que vous avez rentré n'est pas valide."
+      empty:
+        username: "Le champ <strong>Identifiant</strong> est obligatoire."
+        role: "Le champ <strong>Rôle</strong> est obligatoire."
+        password: "Le champ <strong>Mot de passe</strong> est obligatoire."
+        email: "Le champ <strong>Email</strong> est obligatoire."
+      duplicate:
+        username: "L'<strong>identifiant</strong> renseigné existe déjà."
+    messages:
+        create_success: "L'utilisateur a bien été créé."
+        update_success: "L'utilisateur a bien été modifié."

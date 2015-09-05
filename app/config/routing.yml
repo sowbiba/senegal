@@ -1,3 +1,11 @@
+senegal_front:
+    resource: "@SenegalFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+senegal_back:
+    resource: "@SenegalBackBundle/Resources/config/routing.yml"
+    prefix:   /back
+
 senegal_api:
     resource: "@SenegalApiBundle/Controller"
     prefix:   /api

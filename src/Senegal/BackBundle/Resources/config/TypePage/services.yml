@@ -1,0 +1,37 @@
+parameters:
+  senegal.type_page.form.type.class: Senegal\BackBundle\Form\Type\TypePageType
+  senegal.type_page.form.handler.class: Senegal\BackBundle\Form\Handler\TypePageHandler
+  senegal.type_page.form.handler.options:
+    - 'back_type_pages'
+    - 'type_pages.messages.create_success'
+    - 'type_pages.messages.update_success'
+
+services:
+    senegal.type_page.form.handler:
+        class: %senegal.type_page.form.handler.class%
+        scope: request
+        arguments:
+            - @senegal.type_page.form
+            - @request_stack
+            - @templating
+            - @session
+            - @translator
+            - @senegal_api_handler
+            - @security.token_storage
+            - %senegal.type_page.form.handler.options%
+
+    senegal.type_page.form.type:
+        class: %senegal.type_page.form.type.class%
+        tags:
+            - { name: form.type, alias: type_page }
+        arguments:
+            - @senegal_api_handler
+            - @security.token_storage
+            - @security.context
+
+    senegal.type_page.form:
+        class: Symfony\Component\Form\Form
+        factory_service: form.factory
+        factory_method: create
+        arguments:
+            - @senegal.type_page.form.type

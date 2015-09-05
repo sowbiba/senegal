@@ -1,0 +1,51 @@
+.btn-group {
+  width: 100%;
+
+  &.open {
+    .dropdown-toggle.multiselect {
+      background-color: #ffffff;
+      border-color:     #e7e7e7;
+      .box-shadow(0 2px 0 rgba(0, 0, 0, 0.075) inset);
+    }
+  }
+
+  .multiselect {
+    background-color: #ffffff;
+    border:           1px solid #e7e7e7;
+    .box-shadow(0 2px 0 rgba(0, 0, 0, 0.075) inset);
+    font-size:        14px;
+    font-weight:      normal;
+    height:           38px;
+    position:         relative;
+    text-align:       left;
+    text-transform:   none;
+    width:            100%;
+
+    &:hover {
+      background-color: #ffffff;
+      border:           1px solid #e7e7e7;
+      .box-shadow(0 2px 0 rgba(0, 0, 0, 0.075) inset);
+      margin:           0;
+    }
+
+    .caret {
+      position: absolute;
+      right:    10px;
+      top:      16px;
+    }
+  }
+
+  .multiselect-clear-filter {
+    border-width: 3px 1px 0;
+    padding-bottom: 8px !important;
+    padding-top: 9px !important;
+
+    &:hover, &:focus {
+      margin-top: 0;
+    }
+  }
+
+  .multiselect-container {
+    width: 100%;
+  }
+}

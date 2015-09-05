@@ -1,0 +1,20 @@
+list: Liste des forfaits
+create: Nouveau forfait
+edit: Editer le forfait
+export: Export
+
+created_at: Date de création
+
+form_legends:
+    identity: Identité
+form_labels:
+    name: Nom du forfait
+forfait:
+    fields:
+      empty:
+        name: "Le champ <strong>Nom du forfait</strong> est obligatoire."
+      duplicate:
+        name: "Le <strong>nom de forfait</strong> renseigné existe déjà."
+    messages:
+        create_success: "Le forfait a bien été créé."
+        update_success: "Le forfait a bien été modifié."

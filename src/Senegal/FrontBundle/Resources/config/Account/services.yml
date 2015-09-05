@@ -1,0 +1,39 @@
+parameters:
+    senegal.front.account_creation.form.type.class: Senegal\FrontBundle\Form\Type\AccountCreationType
+    senegal.front.account_creation_identification.form.type.class: Senegal\FrontBundle\Form\Type\AccountCreationIdentificationType
+    senegal.front.account_creation_forfait.form.type.class: Senegal\FrontBundle\Form\Type\AccountCreationForfaitType
+    senegal.front.account_creation.form.handler.class: Senegal\FrontBundle\Form\Handler\AccountCreationHandler
+    senegal.front.account_creation.form.handler.options:
+            - 'front_account'
+            - 'account_creation.messages.create_success'
+            - 'account_creation.messages.update_success'
+
+services:
+    senegal.front.account_creation.form.handler:
+        class: %senegal.front.account_creation.form.handler.class%
+        scope: request
+        arguments:
+            - @senegal.front.account_creation.form
+            - @request_stack
+            - @templating
+            - @session
+            - @translator
+            - @senegal_api_handler
+            - @security.token_storage
+            - %senegal.front.account_creation.form.handler.options%
+
+    senegal.front.account_creation.form.type:
+        class: %senegal.front.account_creation.form.type.class%
+        tags:
+            - { name: form.type, alias: account_creation }
+        arguments:
+            - @senegal_api_handler
+            - @security.token_storage
+            - @security.context
+
+    senegal.front.account_creation.form:
+        class: Symfony\Component\Form\Form
+        factory_service: form.factory
+        factory_method: create
+        arguments:
+            - @senegal.front.account_creation.form.type

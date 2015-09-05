@@ -1,0 +1,24 @@
+{% extends "SenegalFrontBundle::layout.html.twig" %}
+
+{% trans_default_domain translation_domain %}
+
+{% form_theme form '::Form/front_bootstrap_3_layout.html.twig' %}
+
+{% block content_body %}
+    <div id="wrapper" class="col-xs-12 margin-bottom-50">
+        <div id="steps">
+            {% if form is defined %}
+                {{ form_start(form, {'action': url('senegal_back_users_create'), 'attr': {'novalidate': 'novalidate', 'data-form-notification-exit': 'true'}}) }}
+                    <div class="step">
+                        {% embed 'SenegalFrontBundle:Account:create_identification.html.twig' with { 'form': form } %}{% endembed %}
+                    </div>
+
+                    <div class="step">
+                        {% embed 'SenegalFrontBundle:Account:create_forfait.html.twig' with { 'form': form } %}{% endembed %}
+                    </div>
+
+                {{ form_end(form) }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content_body %}

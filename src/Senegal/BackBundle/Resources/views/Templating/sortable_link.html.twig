@@ -1,0 +1,31 @@
+{% set reverseDirection = 'asc' %}
+{% set tooltip = "Trier dans l'ordre décroissant" %}
+{% if direction == 'asc' %}
+    {% set reverseDirection = 'desc' %}
+    {% set tooltip = "Trier dans l'ordre croissant" %}
+{% endif %}
+
+{% set type = options.type|default('') %}
+{% if type != '' %}
+    {% set type = '-' ~ type %}
+{% endif %}
+
+<span class="thead-sortable">
+    <a href="{{ options.href }}" class="tip-bottom" title="{{ tooltip }}">
+    {% if options.icon is defined %}
+        <i class="{{ options.icon }}"></i>
+    {% else %}
+        {{ title }}
+    {% endif %}
+    </a>
+
+    <span>
+    {% if sorted %}
+        <i class="fa fa-sort{{ type }}-{{ reverseDirection }}"></i>
+    {% else %}
+        <i class="fa fa-sort"></i>
+    {% endif %}
+
+        <i class="fa fa-sort{{ type }}-{{ direction }}"></i>
+    </span>
+</span>

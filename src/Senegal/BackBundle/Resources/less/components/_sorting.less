@@ -1,0 +1,28 @@
+@import "../helpers/_mixins";
+
+.thead-sortable {
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+
+  a {
+    & + span {
+      position: absolute;
+      right: 0;
+      top: 0;
+      .transition(all 0.1s ease 0s);
+    }
+
+    & + span > i + i,
+    &:hover + span > i:first-child,
+    &:focus + span > i:first-child {
+      display: none;
+    }
+
+    &:hover + span > i + i,
+    &:focus + span > i + i {
+      display: inline-block;
+    }
+  }
+}

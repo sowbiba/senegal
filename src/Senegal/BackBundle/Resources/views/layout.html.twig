@@ -1,0 +1,79 @@
+{% extends "::base.html.twig" %}
+
+{% trans_default_domain translation_domain %}
+
+{% block head_style %}
+    {{ parent() }}
+
+    {% stylesheets combine=true output="css/layout.css" filter='less,cssrewrite'
+        '@SenegalBackBundle/Resources/less/senegal-back.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset("/css/bootstrap-datepicker.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset("/css/bootstrap-switch.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset("/css/bootstrap-multiselect.css") }}" type="text/css">
+{% endblock %}
+
+{% block headline %}Backend Sénégal{% endblock headline %}
+
+{% block header '' %}
+
+{% block foot_script %}
+    {{ parent() }}
+
+    <script src="{{ asset("/js/bootstrap-switch.js") }}"></script>
+    <script src="{{ asset("/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("/js/bootstrap-multiselect.js") }}"></script>
+    <script src="{{ asset("/js/jquery.checkboxes.js") }}"></script>
+    {% javascripts
+    'bundles/bazingajstranslation/js/translator.min.js'
+    'js/translations/config.js'
+    'js/translations/*/*.js' %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+
+    {# Specific for Back #}
+    {% javascripts
+    '@SenegalBackBundle/Resources/public/javascripts/senegal_back_layout.js'
+    output='js/main.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block navbar %}
+    {#{% embed 'SenegalBackBundle::navbar.html.twig' with { fixedTop: true, staticTop: false, inverse: false } %}#}
+        {% trans_default_domain translation_domain %}
+        {#{% block brand %}#}
+            {#<a class="navbar-brand" href="#">#}
+                 {#<img class="img-responsive tip-bottom" src="{{ asset('/bundles/senegalback/images/logo-header.png') }}" alt="{% trans %} Back title {% endtrans %}" title="Backend Broadcast" />#}
+            {#</a>#}
+        {#{% endblock brand %}#}
+        {% block menu %}
+            {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+                {% embed 'SenegalBackBundle:Components:menu.html.twig' with { 'menu_active': menu_active } %}{% endembed %}
+                {#<a href="https://en.gravatar.com/emails/" class="gravatar tip-left" title="{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.email }})" target="_blank">#}
+                    {#<img src="{{ gravatar(app.user.email, null, null, null, true)|raw|replace({'&': '&nbsp;'}) }}" alt="{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.email }})" />#}
+                {#</a>#}
+                {#{{ knp_menu_render('SenegalBackBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'SenegalBackBundle::menu.html.twig'}) }}#}
+                {#{{ knp_menu_render('SenegalBackBundle:Builder:profileMenu', {'currentClass': 'active', 'template': 'SenegalBackBundle::menu.html.twig'}) }}#}
+            {#{% endif %}#}
+        {% endblock %}
+    {#{% endembed %}#}
+{% endblock navbar %}
+
+{% block content %}
+    <section class="content col-xs-12">
+        <div class="row">
+            {% block content_menu %}{% endblock content_menu %}
+
+            {% block content_body %}{% endblock content_body %}
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock footer %}

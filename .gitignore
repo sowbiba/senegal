@@ -38,3 +38,9 @@ app/config/parameters.yml
 app/config/databases.yml
 app/config/behat.yml
 fabric.ini
+
+/node_modules/
+/node_modules/*
+
+/.idea/
+/.idea/*

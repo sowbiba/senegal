@@ -1,0 +1,76 @@
+{% extends "SenegalBackBundle::layout.html.twig" %}
+
+{% trans_default_domain translation_domain %}
+
+{% set menu_active = 'forfaits' %}
+
+{% block container_class %}{{ parent() }} edit_forfait{% endblock container_class %}
+
+{% block headline %}
+    {{ 'edit'|trans({}, 'back_forfaits') }} :
+    {% if form.vars.value.firstName is defined %}{{ form.vars.value.firstName }}{% endif %}
+    {% if form.vars.value.name is defined %}{{ form.vars.value.name }}{% endif %}
+{% endblock headline %}
+
+{% block header_actions %}
+    <a href="{{ path('senegal_back_forfaits_list') }}" class="btn btn-danger margin-top-30">
+        <i class="fa fa-list"></i>
+        Retour à la liste
+    </a>
+{% endblock header_actions %}
+
+{% block content_body %}
+    {{ form_start(form, {'action': url('senegal_back_forfait_edit', {'forfaitId': app.request.get('forfaitId')}), 'attr': {'novalidate': 'novalidate', 'data-form-notification-exit': 'true'}}) }}
+
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <fieldset>
+                    <legend>{{ 'form_legends.identity'|trans({}, 'back_forfaits') }}</legend>
+
+                    {{ form_row(form.name) }}
+
+                    <div class="form-group margin-top-30">
+                        <h3>Modèles de page</h3>
+                        <ul class="type-pages" data-prototype="{% filter escape %}
+                                    {{ include('SenegalBackBundle:Components:forfaitTypePagePrototype.html.twig', { 'form': form.forfaitTypePages.vars.prototype }) }}
+                                {% endfilter %}">
+                            {# itère sur chaque type de page existant et affiche un selecteur de type + un selecteur de nombre #}
+                            {% for forfaitTypePage in form.forfaitTypePages %}
+                                <li>
+                                    {% form_theme forfaitTypePage 'SenegalBackBundle:Components:forfait-layout.html.twig' %}
+                                    {{ form_widget(forfaitTypePage) }}
+                                </li>
+                            {% endfor %}
+                            <li id="type-page-add-link-li">
+                                <div class="margin-top-30 margin-left-20" id="type-page-add-link"><a href="#" class="pull-left tip-top" title="Ajouter un modèle de page"><i class="fa fa-2x fa-plus-circle"></i></a><span class="add_link_label pull-left margin-left-10">Ajouter un modèle de page</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group pull-left margin-top-30 margin-left-30 available-count" id="typePagesAvailable">{{ form.children.typePagesAvailable.vars.value }}</div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="margin-top-30">
+        <div class="well clearfix">
+            <button type="submit" name="update_and_edit" class="btn btn-primary" data-disable-after-click="true">
+                <i class="fa fa-save"></i>
+                {{ 'form.update_and_edit'|trans }}
+            </button>
+            <button type="submit" name="update_and_list" class="btn btn-primary" data-disable-after-click="true">
+                <i class="fa fa-save"></i>
+                <i class="fa fa-list"></i>
+                {{ 'form.update_and_list'|trans }}
+            </button>
+            {{ 'form.or'|trans }}
+            <a href="{{ path('senegal_back_forfaits_list') }}" class="btn btn-danger">
+                <i class="fa fa-share"></i>
+                {{ 'form.cancel'|trans }}
+            </a>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock content_body %}

@@ -1,0 +1,50 @@
+Back title: Backoffice
+you are logged in as: Vous êtes connecté en tant que %fullname%
+feature yet unavailable: Fonctionnalité pas encore disponible
+agence: Utilisateur Front
+admin_user: Utilisateur de l'Admin
+admin_full: Admnistrateur de l'Admin
+back: Administrateur du Backend
+Please fill out this field.: Ce champ est obligatoire. Merci de le remplir.
+search: Rechercher
+reset: Réinitialiser
+search_submit: OK
+results: "{0} Aucun résultat|{1} 1 résultat|]1,Inf] %count% résultats"
+
+menu:
+    management: Gestion des données
+    data: Données
+    users_and_groups: Utilisateurs et groupes
+    users: Utilisateurs
+    groups: Groupes d'utilisateurs
+    contract_sets: Points d'entrée
+    logout: Déconnexion
+form:
+    login :
+        login: Identifiant
+        password: Mot de passe
+        connexion: Connexion
+        invalid_username_or_password: Identifiant ou mot de passe incorrect
+    or: ou
+    create_and_edit: Créer
+    create_and_list: Créer et retourner à la liste
+    create_and_create: Créer et ajouter
+    update_and_edit: Mettre à jour
+    update_and_list: Mettre à jour et retourner à la liste
+    cancel: Annuler les modifications
+    save: Enregistrer
+    keep_my_version: Garder toutes mes modifications
+    ignore_mine: Garder les données en base
+
+messages:
+    save_error: Des erreurs sont survenues lors de la sauvegarde. Veuillez contacter un administrateur.
+    save_success: Vos modifications ont bien été sauvegardées.
+    delete_error: Des erreurs sont survenues lors de la suppression %item_name%. Veuillez contacter un administrateur.
+    delete_success: %item_name% a bien été supprimé.
+    no_action: Aucun changement n'a pu être effectué. Merci de contacter un administrateur.
+    manage_conflicts: "Une autre sauvegarde a eu lieu pendant vos modifications.<br><br>Veuillez gérer TOUS les conflits occasionnés avant de soumettre à nouveau le formulaire."
+    locked: "Cet élément est en cours d'édition par un autre utilisateur. <br><br>Vous ne pouvez pas changer ses données tant que l'édition en cours n'est pas terminée."
+
+multiselect:
+    all_selected: "Tous"
+    none_selected: "Aucun(e)"

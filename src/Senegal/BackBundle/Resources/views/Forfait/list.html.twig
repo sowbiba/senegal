@@ -1,0 +1,58 @@
+{% extends "SenegalBackBundle::layout.html.twig" %}
+
+{% set menu_active = 'forfaits' %}
+
+{% trans_default_domain translation_domain %}
+
+{% block container_class %}{{ parent() }} list_forfaits {% endblock container_class %}
+
+{% block headline %}{{ 'list'|trans({}, 'back_forfaits') }}{% endblock headline %}
+
+{% block content_body %}
+    <p class="h4">{{ 'results'|transchoice(forfaits.getTotalItemCount) }}</p>
+
+    <div class="row col-xs-9">
+        {% if (forfaits|length > 0) %}
+            <table class="table table-condensed table-bordered table-back">
+                <thead>
+                    <tr>
+                        <th{% if forfaits.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(forfaits, 'Identifiant', 'name', {'type': 'alpha'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="tip-top{% if forfaits.isSorted('createdAt') %} sorted{% endif %}" title="Date de création">{{ knp_pagination_sortable(forfaits, 'Date de création', 'createdAt', {'icon': 'fa fa-calendar', 'type': 'amount'}, {}, 'SenegalBackBundle:Templating:sortable_link.html.twig') }}</th>
+                        <th class="actions form-flow-actions"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for forfait in forfaits %}
+                    {% if forfait is not null %}
+                    <tr class="">
+                        <td>{{ forfait.name }}</td>
+                        <td>{% if forfait.createdAt is defined %}{{ forfait.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td class="actions form-flow-actions">
+                            <a title="{{ 'edit'|trans({}, 'back_forfaits') }}" class="tip-bottom list_edit" href="{{ path('senegal_back_forfait_edit', {'forfaitId': forfait.id}) }}">
+                                <i class="fa fa-2x fa-pencil-square-o"></i>
+                            </a>
+                            <a title="{{ 'delete'|trans({}, 'back_forfaits') }}" class="tip-bottom list_delete" href="#">
+                                <i class="fa fa-2x fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="navigation">
+                {{ knp_pagination_render(forfaits, 'SenegalBackBundle:Templating:sliding.html.twig') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="list-filter well col-xs-3 pull-right"{% if app.request.query.has('filter_close') %} style="display: none;"{% endif %}>
+        <div class="margin-bottom-70">
+            <a href="{{ path('senegal_back_forfaits_create') }}">
+                <button class="btn btn-primary">{{ 'create'|trans({}, 'back_forfaits') }}</button>
+            </a>
+        </div>
+    </div>
+{% endblock content_body %}

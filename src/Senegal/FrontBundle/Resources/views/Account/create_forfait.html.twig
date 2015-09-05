@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="well col-xs-12">
+        <fieldset>
+            <legend>{{ 'form_legends.forfait'|trans({}, 'front_account') }}</legend>
+
+            {{ form_row(form.forfait.forfait) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="well col-xs-12 navigation">
+        <div class="col-xs-5 pull-left clearfix navigation-previous">
+            <a href="#" class="btn btn-warning">
+                <i class="fa fa-reply margin-right-10"></i>
+                {{ 'form_labels.cancel'|trans({}, 'front_account') }}
+            </a>
+        </div>
+        <div class="col-xs-5 pull-right navigation-next">
+            <a href="#" name="forfait_validate_and_next_step" class="btn btn-success pull-right" data-disable-after-click="true">
+                <i class="fa fa-chevron-right margin-right-10"></i>
+                {{ 'form_labels.identification_validate_and_next_step'|trans({}, 'front_account') }}
+            </a>
+        </div>
+    </div>
+</div>
