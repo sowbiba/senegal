@@ -44,3 +44,8 @@ fabric.ini
 
 /.idea/
 /.idea/*
+
+/bower_components/
+/bower_components/*
+
+/composer.phar

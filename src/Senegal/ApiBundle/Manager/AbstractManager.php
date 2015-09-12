@@ -35,6 +35,14 @@ abstract class AbstractManager
         $this->repository  = $this->em->getRepository($this->entityClass);
     }
 
+    /**
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->em;
+    }
+
     final public function find($id)
     {
         return $this->repository->find($id);

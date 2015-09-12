@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 use Senegal\ApiBundle\Utils\HashGenerator;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +19,94 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="user_username_unique", columns={"username"})})
  * @ORM\Entity(repositoryClass="Senegal\ApiBundle\Repository\UserRepository")
+ *
+ * @UniqueEntity(fields="username", message="validation.field.duplicate.username")
+ *
+ * @Serializer\AccessorOrder("alphabetical")
+ * @Serializer\ExclusionPolicy("all")
+ *
+ * @Hateoas\Relation(
+ *      "creator",
+ *      href = @Hateoas\Route(
+ *          "user_read",
+ *          parameters = { "user_id" = "expr(object.getCreatedBy().getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(null === object.getCreatedBy())",
+ *          groups = {
+ *              "user_read",
+ *          },
+ *      ),
+ * )
+ * @Hateoas\Relation(
+ *      "roles",
+ *      embedded = "expr(object.getRoles())",
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['view']))",
+ *          groups = {
+ *              "user_list",
+ *              "user_create",
+ *              "user_read",
+ *              "user_update",
+ *
+ *              "authentication",
+ *          },
+ *      ),
+ * )
+ *
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "user_read",
+ *          parameters = { "user_id" = "expr(object.getId())" }
+ *      ),
+ *      attributes = {
+ *          "method" = "GET",
+ *      },
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['view']))",
+ *          groups = {
+ *              "user_list",
+ *              "user_create",
+ *              "user_update",
+ *          },
+ *      ),
+ * )
+ * @Hateoas\Relation(
+ *      "update",
+ *      href = @Hateoas\Route(
+ *          "user_update",
+ *          parameters = { "user_id" = "expr(object.getId())" },
+ *      ),
+ *      attributes = {
+ *          "method" = "PUT",
+ *      },
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['edit']))",
+ *          groups = {
+ *              "user_create",
+ *              "user_read",
+ *          },
+ *      ),
+ * )
+ * @Hateoas\Relation(
+ *      "delete",
+ *      href = @Hateoas\Route(
+ *          "user_delete",
+ *          parameters = { "user_id" = "expr(object.getId())" },
+ *      ),
+ *      attributes = {
+ *          "method" = "DELETE",
+ *      },
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['delete']))",
+ *          groups = {
+ *              "user_create",
+ *              "user_read",
+ *              "user_update",
+ *          },
+ *      ),
+ * )
  */
 class User implements UserInterface
 {
@@ -191,6 +280,18 @@ class User implements UserInterface
      * )
      */
     private $role;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=255)
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({
+     *      "authentication",
+     * })
+     */
+    private $token;
 
     /**
      * @var \DateTime
@@ -394,6 +495,36 @@ class User implements UserInterface
     public function getRoleName()
     {
         return $this->getRole()->getName();
+    }
+
+    /**
+     * @return array
+     */
+    public function getRolesNames()
+    {
+        return $this->getRoles()->map(function (Role $role) {
+            return $role->getName();
+        })->toArray();
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

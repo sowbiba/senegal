@@ -14,14 +14,14 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Role
 {
-    const FRONT_ROLE = 'agence';
-    const FRONT_ROLE_ID = 4;
+    const SUPER_ADMIN_ROLE = 'SUPER_ADMIN';
+    const SUPER_ADMIN_ROLE_ID = 1;
 
-    const ADMIN_ROLE = 'admin_full';
-    const ADMIN_ROLE_ID = 2;
+    const ACCOUNT_ADMIN_ROLE = 'ACCOUNT_ADMIN';
+    const ACCOUNT_ADMIN_ROLE_ID = 2;
 
-    const BACK_ROLE = 'back';
-    const BACK_ROLE_ID = 1;
+    const USER_ROLE = 'USER';
+    const USER_ROLE_ID = 3;
 
     /**
      * @var int
@@ -35,7 +35,6 @@ class Role
      *      "authentication",
      *      "role_list",
      *      "user_create",
-     *      "user_list",
      *      "user_read",
      *      "user_update"
      * })

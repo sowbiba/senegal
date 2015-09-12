@@ -3,3 +3,33 @@ imports:
     - { resource: "User/services.yml" }
     - { resource: "Forfait/services.yml" }
     - { resource: "TypePage/services.yml" }
+
+parameters:
+    fos_rest.view_response_listener.class: Senegal\ApiBundle\Listener\ViewResponseListener
+
+services:
+    apikey_user_provider:
+        class: Senegal\ApiBundle\Security\ApiKeyUserProvider
+        arguments:
+            - @senegal_user_manager=
+
+    apikey_authenticator:
+        class: Senegal\ApiBundle\Security\ApiKeyAuthenticator
+        arguments:
+            - @apikey_user_provider
+            - @security.http_utils
+
+    security.access.voter:
+        class: Senegal\ApiBundle\Security\ApiVoter
+        public: false
+        arguments:
+          - @security.role_hierarchy
+        tags:
+           - { name: security.voter }
+
+    senegal_api.param_converter.collection_param_converter:
+        class: Senegal\ApiBundle\ParamConverter\CollectionParamConverter
+        arguments:
+            - @doctrine.orm.entity_manager
+        tags:
+            - { name: request.param_converter, converter: collection_param_converter }

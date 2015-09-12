@@ -8,10 +8,13 @@ use FOS\RestBundle\View\View as FOSView;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Senegal\ApiBundle\Entity\User;
+use Senegal\ApiBundle\Serializer\Exclusion\FieldsListExclusionStrategy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Senegal\ApiBundle\Model\Collection;
 
 /**
  * @Rest\NamePrefix("user_")
@@ -19,53 +22,83 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 class UserController extends ApiController
 {
     /**
+     * Gets the list of users.
+     *
+     * <hr>
+     *
+     * After getting the initial list, use the <strong>first, last, next, prev</strong> link relations in the
+     * <strong>_links</strong> property to get more users in the list. Note that <strong>next</strong> will not be
+     * available at the end of the list and <strong>prev</strong> will not be available at the start of the list. If
+     * the results are exactly one page neither <strong>prev</strong> nor <strong>next</strong> will be available.
+     *
+     * The <strong>_embedded</strong> embedded user resources key'ed by relation name.
+     *
+     * <hr>
+     *
+     * The filters allows you to use the percent sign and underscore wildcards (e.g. name, %name, name%, %name%,
+     * na_e, n%e).
+     *
      * @ApiDoc(
      *     section="User",
-     *     description="Returns a collection of users",
+     *     description="List users",
      *     statusCodes={
-     *         200="Returned when successful",
-     *         204="Returned when no user are found"
-     *     }
+     *         200="OK",
+     *         400="Bad request",
+     *         403="Forbidden",
+     *     },
+     *     parameters={
+     *         {
+     *             "name"="fields",
+     *             "dataType"="string",
+     *             "description"="Specify the fields that will be returned using the format FIELD_NAME[, FIELD_NAME ...]. Valid fields are id and name. e.g. If you want the result with the name field only, the fields string would be name. Default is: all the fields.",
+     *             "required"=false,
+     *         },
+     *         {
+     *             "name"="orderBy",
+     *             "dataType"="string",
+     *             "description"="Specify the order criteria of the result using the format COLUMN_NAME ORDER[, COLUMN_NAME ORDER ...]. Valid column names are id and name. Valid orders are asc and desc. e.g. If you want the user ordered by name in descending order and then order by id in ascending order, the order string would be name=desc, id=asc. Default is: id asc.",
+     *             "required"=false,
+     *         },
+     *         {
+     *             "name"="page",
+     *             "dataType"="integer",
+     *             "description"="Current page to returned. Default is: 1.",
+     *             "required"=false,
+     *         },
+     *         {
+     *             "name"="limit",
+     *             "dataType"="integer",
+     *             "description"="Maximum number of items requested (-1 for no limit). Default is: 10.",
+     *             "required"=false,
+     *         },
+     *     },
      * )
      *
      * @Rest\Get("/users")
+     * @ParamConverter("users", class="SenegalApiBundle:User", converter="collection_param_converter", options={"name"="users"})
      *
-     * @Rest\QueryParam(name="username", default=null, nullable=true, strict=false, description="Filter by username")
-     * @Rest\QueryParam(name="lastname", default=null, nullable=true, strict=false, description="Filter by name")
-     * @Rest\QueryParam(name="firstName", default=null, nullable=true, strict=false, description="Filter by first name")
-     * @Rest\QueryParam(name="email", default=null, nullable=true, strict=false, description="Filter by email")
-     * @Rest\QueryParam(name="active", default=null, nullable=true, requirements="(0|1)+", strict=false, description="Filter by activation status")
-     * @Rest\QueryParam(name="roleId", nullable=true, strict=false, description="Filter by role id")
-     * @Rest\QueryParam(key="serializerGroups", name="serializerGroups[]", default="user_list", array=true, requirements="(user_list)+", strict=false, description="The serializer groups")
-     * @Rest\QueryParam(name="sortField", default="username", requirements="(active|email|firstName|group|name|receiveMail|role|testEndDate|updatedAt|username)+", strict=false, description="The sort field")
-     * @Rest\QueryParam(name="sortOrder", default="asc", requirements="(asc|desc)+", strict=false, description="The sort order")
-     * @Rest\QueryParam(name="limit", default=null, requirements="\d+", strict=false, description="The sort limit")
-     * @Rest\QueryParam(name="offset", default=null, requirements="\d+", strict=false, description="The sort offset limit")
+     * @Security("is_granted('super_admin')")
      *
-     * @param ParamFetcher $paramFetcher
+     * @param Request    $request
+     * @param Collection $users
      *
-     * @return Response
+     * @return FOSView
      */
-    public function listAction(ParamFetcher $paramFetcher)
+    public function listAction(Request $request, Collection $users)
     {
-        $userList = $this->get('senegal_user_manager')->findByFilters(
-            $this->cleanFilters($paramFetcher->all()),
-            $paramFetcher->get('sortField'),
-            $paramFetcher->get('sortOrder'),
-            $paramFetcher->get('limit'),
-            $paramFetcher->get('offset')
-        );
-
-        $statusCode = Response::HTTP_OK;
-        if (!count($userList['users'])) {
-            $statusCode = Response::HTTP_NO_CONTENT;
+        if ('' !== $fields = $request->query->get('fields', '')) {
+            $fields = array_merge(explode(',', $fields), ['users']);
         }
 
-        return FOSView::create()
-            ->setStatusCode($statusCode)
-            ->setData($userList)
-            ->setSerializationContext(SerializationContext::create()->setGroups($paramFetcher->get('serializerGroups[]')))
-        ;
+        return $this->view($users)
+            ->setSerializationContext(
+                SerializationContext::create()
+                    ->setGroups(['Default', 'user_list'])
+                    ->addExclusionStrategy(
+                    // todo: Use User::class when the PHP version is >= 5.5
+                        new FieldsListExclusionStrategy('Senegal\ApiBundle\Entity\User', $fields)
+                    )
+            );
     }
 
     /**

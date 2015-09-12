@@ -8,9 +8,10 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.6.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "~1.2",
+        "symfony/symfony": "2.7.*",
+        "doctrine/orm": ">=2.5",
+        "doctrine/doctrine-bundle": ">=1.5",
+        "twig/twig": "~1.0",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -23,7 +24,15 @@
         "jms/serializer-bundle": "@stable",
         "friendsofsymfony/rest-bundle": "@stable",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "nelmio/api-doc-bundle": "@stable"
+        "nelmio/api-doc-bundle": "@stable",
+        "knplabs/knp-menu-bundle": "dev-master",
+        "knplabs/knp-menu": "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "ornicar/gravatar-bundle" : "1.*",
+        "willdurand/js-translation-bundle": "@stable",
+        "guzzlehttp/guzzle": "~5.3",
+        "white-october/pagerfanta-bundle": "^1.0",
+        "willdurand/hateoas-bundle": "1.0.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

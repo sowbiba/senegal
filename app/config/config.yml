@@ -45,6 +45,9 @@ assetic:
     use_controller: true
     bundles:
         - SenegalApiBundle
+        - SenegalBackBundle
+        - SenegalFrontBundle
+
         - TwigBundle
     filters:
         cssrewrite: ~
@@ -200,10 +203,16 @@ swiftmailer:
 # NelmioApiDoc Configuration
 nelmio_api_doc:
     sandbox:
+        accept_type: "application/json"
         authentication:
             name: api-key
             delivery: header
             custom_endpoint: false
+        body_format:
+            formats: []
+        request_format:
+            formats: []
+            method:  "accept_header"
 
 stof_doctrine_extensions:
     default_locale: %locale%
@@ -220,26 +229,18 @@ jms_serializer:
         auto_detection: true
 
 fos_rest:
-    param_fetcher_listener: true
-    body_listener: true
-    format_listener: true
+    serializer:
+        serialize_null: true
+    routing_loader:
+        default_format: json
+        include_format: false
+    format_listener: false
     view:
         view_response_listener: 'force'
         formats:
             xml: true
             json : true
-            html: true
-        templating_formats:
             html: false
-        force_redirects:
-            html: false
-        failed_validation: HTTP_BAD_REQUEST
-        default_engine: twig
-    routing_loader:
-        default_format: json
-        include_format: false
-    serializer:
-        serialize_null: false
 
 sensio_framework_extra:
     view:

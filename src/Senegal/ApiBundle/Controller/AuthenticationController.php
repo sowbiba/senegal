@@ -4,6 +4,7 @@ namespace Senegal\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
+use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Senegal\ApiBundle\Utils\HashGenerator;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,11 +42,14 @@ class AuthenticationController extends ApiController
             $encoder = $this->get('senegal_password_encoder');
 
             if ($encoder->isPasswordValid($user->getPassword(), $paramFetcher->get('password'), $user->getSalt())) {
-                // if the authentification is successfull, we generate a new token for the user
-//                $user->setToken(HashGenerator::generate());
-//                $this->getDoctrine()->getManager()->flush();
+                // If the authentification is successfull, we generate a new token for the user.
+                $this->get('senegal_user_manager')->generateToken($user);
 
-                return $user;
+                return $this->view($user)
+                    ->setSerializationContext(
+                        SerializationContext::create()
+                            ->setGroups(['authentication'])
+                    );
             } else {
                 return new Response('', Response::HTTP_UNAUTHORIZED);
             }
