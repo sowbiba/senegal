@@ -18,7 +18,7 @@ services:
             - @templating
             - @session
             - @translator
-            - @senegal_api_handler
+            - @senegal.api.client
             - @security.token_storage
             - %senegal.front.account_creation.form.handler.options%
 
@@ -27,7 +27,7 @@ services:
         tags:
             - { name: form.type, alias: account_creation }
         arguments:
-            - @senegal_api_handler
+            - @senegal.api.client
             - @security.token_storage
             - @security.context
 

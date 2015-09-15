@@ -38,7 +38,7 @@ class TypePageController extends BackController
         $filters['limit'] = 20;
         $filters['offset'] = $filters['limit'] * ($page - 1);
 
-        $typePages = $this->get('senegal_api_handler')->get('type-pages', ['query' => $filters])->json();
+        $typePages = $this->get('senegal.api.client')->get('type-pages', ['query' => $filters])->json();
 
         $typePages_pagination = $this->get('knp_paginator')->paginate(
             (isset($typePages['typePages']) && isset($typePages['total'])) ? $this->getPaginateData($typePages['typePages'], $typePages['total'], $filters['offset']) : [],

@@ -5,6 +5,7 @@ namespace Senegal\BackBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View as FOSView;
+use GuzzleHttp\Exception\RequestException;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Senegal\ApiBundle\Entity\User;
@@ -41,18 +42,38 @@ class UserController extends BackController
         }
 
         $page = $request->query->get('page', 1);
+        $limit = 20;
 
-        $filters['sortField'] = $request->query->get('sort', 'role');
-        $filters['sortOrder'] = $request->query->get('direction', 'asc');
-        $filters['limit'] = 20;
-        $filters['offset'] = $filters['limit'] * ($page - 1);
+        $query = [
+            'orderBy' => "{$request->query->get('sort', 'updatedAt')} {$request->query->get('direction', 'desc')}",
+            'limit' => $limit,
+            'page' => $page,
+        ];
 
-        $users = $this->get('senegal_api_handler')->get('users', ['query' => $filters])->json();
+        $filterForm = $this->get('senegal.user_filter.form');
+        $filterForm->handleRequest($request);
+
+        $filters = $filterForm->getData();
+        $filters = null !== $filters ? $filters : [];
+
+        foreach ($filters as $key => $filter) {
+            if (null === $filter || '' === $filter || (is_array($filter) && 0 === count($filter))) {
+                unset($filters[$key]);
+            }
+        }
+
+        try {
+            $users = $this->apiGet('users', ['query' => array_merge($filters, $query)])->json();
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+
+            return new HttpException($response->getStatusCode(), $response->getBody()->getContents());
+        }
 
         $users_pagination = $this->get('knp_paginator')->paginate(
-            (isset($users['users']) && isset($users['total'])) ? $this->getPaginateData($users['users'], $users['total'], $filters['offset']) : [],
+            (isset($users['_embedded']['users']) && isset($users['total'])) ? $this->getPaginateData($users['_embedded']['users'], $users['total'], $limit * ($page - 1)) : [],
             $page,
-            $filters['limit']
+            $limit
         );
 
         return $this->render('SenegalBackBundle:User:list.html.twig', [

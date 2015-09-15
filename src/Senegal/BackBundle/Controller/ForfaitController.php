@@ -38,7 +38,7 @@ class ForfaitController extends BackController
         $filters['limit'] = 20;
         $filters['offset'] = $filters['limit'] * ($page - 1);
 
-        $forfaits = $this->get('senegal_api_handler')->get('forfaits', ['query' => $filters])->json();
+        $forfaits = $this->get('senegal.api.client')->get('forfaits', ['query' => $filters])->json();
 
         $forfaits_pagination = $this->get('knp_paginator')->paginate(
             (isset($forfaits['forfaits']) && isset($forfaits['total'])) ? $this->getPaginateData($forfaits['forfaits'], $forfaits['total'], $filters['offset']) : [],

@@ -42,7 +42,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "roles",
  *      embedded = "expr(object.getRoles())",
  *      exclusion = @Hateoas\Exclusion(
- *          excludeIf = "expr(not is_granted(['view']))",
  *          groups = {
  *              "user_list",
  *              "user_create",
@@ -198,7 +197,9 @@ class User implements UserInterface
      *      "user_list",
      *      "user_create",
      *      "user_read",
-     *      "user_update"
+     *      "user_update",
+     *
+     *      "authentication"
      * })
      */
     private $lastname;
@@ -213,7 +214,9 @@ class User implements UserInterface
      *      "user_list",
      *      "user_create",
      *      "user_read",
-     *      "user_update"
+     *      "user_update",
+     *
+     *      "authentication"
      * })
      */
     private $firstname;
@@ -259,7 +262,9 @@ class User implements UserInterface
      *      "user_list",
      *      "user_create",
      *      "user_read",
-     *      "user_update"
+     *      "user_update",
+     *
+     *      "authentication"
      * })
      */
     private $email;

@@ -1,0 +1,11 @@
+parameters:
+    senegal.security.user.provider.class: Senegal\SecurityBundle\Security\ApiUserProvider
+    senegal.security.user.authenticator.class: Senegal\SecurityBundle\Security\ApiAuthenticator
+
+services:
+    senegal.security.user.provider:
+        class: %senegal.security.user.provider.class%
+        arguments: ["@senegal.api.client", '@service_container']
+
+    senegal.security.user.authenticator:
+        class: %senegal.security.user.authenticator.class%

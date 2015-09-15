@@ -28,6 +28,7 @@ parameters:
 
     translation_domain: back
     api_base_url: http://senegal.dev/api/
+    api_login_action: login-check
     back_role_classes:
       - ADMIN: success
       - SUPER_ADMIN: info

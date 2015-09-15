@@ -16,7 +16,7 @@ services:
             - @templating
             - @session
             - @translator
-            - @senegal_api_handler
+            - @senegal.api.client
             - @security.token_storage
             - %senegal.type_page.form.handler.options%
 
@@ -25,7 +25,7 @@ services:
         tags:
             - { name: form.type, alias: type_page }
         arguments:
-            - @senegal_api_handler
+            - @senegal.api.client
             - @security.token_storage
             - @security.context
 

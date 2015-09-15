@@ -22,9 +22,12 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Senegal\ApiBundle\SenegalApiBundle(),
             new Senegal\BackBundle\SenegalBackBundle(),
             new Senegal\FrontBundle\SenegalFrontBundle(),
+            new Senegal\SecurityBundle\SenegalSecurityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

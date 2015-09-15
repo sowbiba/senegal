@@ -1,12 +1,3 @@
-parameters:
-    senegal.client.class: GuzzleHttp\Client
-
-services:
-    senegal_api_handler:
-        class: %senegal.client.class%
-        arguments:
-            - base_url: %api_base_url%
-
 imports:
     - { resource: "User/services.yml" }
     - { resource: "Forfait/services.yml" }

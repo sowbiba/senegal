@@ -200,6 +200,18 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+
+knp_paginator:
+    page_range: 20                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
 # NelmioApiDoc Configuration
 nelmio_api_doc:
     sandbox:
@@ -229,6 +241,7 @@ jms_serializer:
         auto_detection: true
 
 fos_rest:
+    param_fetcher_listener: true
     serializer:
         serialize_null: true
     routing_loader:
@@ -245,3 +258,12 @@ fos_rest:
 sensio_framework_extra:
     view:
         annotations: false
+
+
+monolog:
+    handlers:
+        applog:
+            type: rotating_file
+            path: %kernel.logs_dir%/%kernel.environment%.app_logs.log
+            channels: app
+            max_files: 10

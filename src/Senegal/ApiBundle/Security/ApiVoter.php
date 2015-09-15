@@ -3,7 +3,7 @@
 namespace Senegal\ApiBundle\Security;
 
 use Senegal\ApiBundle\Entity\Role as ApiRole;
-use Senegal\ApiBundle\Entity\User;
+use Senegal\SecurityBundle\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Role\Role;
@@ -12,9 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiVoter implements VoterInterface
 {
-    const SUPER_ADMIN = 'super_admin';
-    const ACCOUNT_ADMIN = 'account_admin';
-    const USER = 'user';
+    const SUPER_ADMIN = 'SUPER_ADMIN';
+    const ACCOUNT_ADMIN = 'ACCOUNT_ADMIN';
+    const USER = 'USER';
 
     private $roleHierarchy;
 
@@ -49,11 +49,22 @@ class ApiVoter implements VoterInterface
             );
         }
 
+        $i=0;
+        foreach ($attributes as $attribute) {
+            if (
+                0 <= strpos($attribute, 'ROLE_')
+            ) {
+                $attributes[$i] = str_replace('ROLE_', '', $attribute);
+            }
+
+            $i++;
+        }
+
         // get the action
-        $action = $attributes[0];
+        $roleRequired = strtoupper($attributes[0]);
 
         // check if the given attribute is covered by this voter
-        if (!$this->supportsAttribute($action)) {
+        if (!$this->supportsAttribute($roleRequired)) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
@@ -71,23 +82,11 @@ class ApiVoter implements VoterInterface
             }
         }
 
-        switch ($action) {
-            case self::ACCOUNT_ADMIN:
-                $expectedRole = ApiRole::ACCOUNT_ADMIN_ROLE;
-                break;
-            case self::SUPER_ADMIN: //view is allowed for all users
-                $expectedRole = ApiRole::SUPER_ADMIN_ROLE;
-                break;
-            default: //view is allowed for all users
-                $expectedRole = ApiRole::USER_ROLE;
-                break;
-        }
-
         /**
          * @var Role $role
          */
         foreach ($this->roleHierarchy->getReachableRoles($userRoles) as $role) {
-            if ($role->getRole() === $expectedRole) {
+            if ($role->getRole() === $roleRequired) {
                 return VoterInterface::ACCESS_GRANTED;
             }
         }

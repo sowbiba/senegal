@@ -1,0 +1,21 @@
+login:
+    pattern: /login
+    defaults: { _controller: SenegalSecurityBundle:Security:login }
+
+back_login:
+    pattern: /back/login
+    defaults: { _controller: SenegalSecurityBundle:Security:login, env: back }
+
+
+login_check:
+    pattern: /login_check
+
+back_login_check:
+    pattern: /back/login_check
+
+
+logout:
+    pattern: /logout
+
+back_logout:
+    pattern: /back/logout

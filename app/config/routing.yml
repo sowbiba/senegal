@@ -1,3 +1,7 @@
+senegal_security:
+    resource: "@SenegalSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 senegal_front:
     resource: "@SenegalFrontBundle/Controller"
     prefix:   /

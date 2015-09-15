@@ -44,24 +44,25 @@
 {% endblock %}
 
 {% block navbar %}
-    {#{% embed 'SenegalBackBundle::navbar.html.twig' with { fixedTop: true, staticTop: false, inverse: false } %}#}
-        {% trans_default_domain translation_domain %}
-        {#{% block brand %}#}
-            {#<a class="navbar-brand" href="#">#}
-                 {#<img class="img-responsive tip-bottom" src="{{ asset('/bundles/senegalback/images/logo-header.png') }}" alt="{% trans %} Back title {% endtrans %}" title="Backend Broadcast" />#}
-            {#</a>#}
-        {#{% endblock brand %}#}
-        {% block menu %}
-            {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+    {% trans_default_domain translation_domain %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            {% block brand %}
+                {% embed 'SenegalBackBundle:Components:brand.html.twig' %}{% endembed %}
+            {% endblock brand %}
+
+            {% block menu %}
+                {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
                 {% embed 'SenegalBackBundle:Components:menu.html.twig' with { 'menu_active': menu_active } %}{% endembed %}
                 {#<a href="https://en.gravatar.com/emails/" class="gravatar tip-left" title="{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.email }})" target="_blank">#}
-                    {#<img src="{{ gravatar(app.user.email, null, null, null, true)|raw|replace({'&': '&nbsp;'}) }}" alt="{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.email }})" />#}
+                {#<img src="{{ gravatar(app.user.email, null, null, null, true)|raw|replace({'&': '&nbsp;'}) }}" alt="{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.email }})" />#}
                 {#</a>#}
                 {#{{ knp_menu_render('SenegalBackBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'SenegalBackBundle::menu.html.twig'}) }}#}
                 {#{{ knp_menu_render('SenegalBackBundle:Builder:profileMenu', {'currentClass': 'active', 'template': 'SenegalBackBundle::menu.html.twig'}) }}#}
-            {#{% endif %}#}
-        {% endblock %}
-    {#{% endembed %}#}
+                {#{% endif %}#}
+            {% endblock menu %}
+        </div>
+    </nav>
 {% endblock navbar %}
 
 {% block content %}

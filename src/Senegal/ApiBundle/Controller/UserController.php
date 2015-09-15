@@ -77,7 +77,7 @@ class UserController extends ApiController
      * @Rest\Get("/users")
      * @ParamConverter("users", class="SenegalApiBundle:User", converter="collection_param_converter", options={"name"="users"})
      *
-     * @Security("is_granted('super_admin')")
+     * @Security("is_granted('SUPER_ADMIN')")
      *
      * @param Request    $request
      * @param Collection $users
@@ -90,7 +90,7 @@ class UserController extends ApiController
             $fields = array_merge(explode(',', $fields), ['users']);
         }
 
-        return $this->view($users)
+        return $this->createView($request, $users)
             ->setSerializationContext(
                 SerializationContext::create()
                     ->setGroups(['Default', 'user_list'])

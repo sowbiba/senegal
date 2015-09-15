@@ -5,27 +5,15 @@ imports:
     - { resource: "TypePage/services.yml" }
 
 parameters:
-    fos_rest.view_response_listener.class: Senegal\ApiBundle\Listener\ViewResponseListener
+    #fos_rest.view_response_listener.class: Senegal\ApiBundle\Listener\ViewResponseListener
 
 services:
-    apikey_user_provider:
-        class: Senegal\ApiBundle\Security\ApiKeyUserProvider
+    senegal.listener.exception_listener:
+        class: Senegal\ApiBundle\Listener\ExceptionListener
         arguments:
-            - @senegal_user_manager=
-
-    apikey_authenticator:
-        class: Senegal\ApiBundle\Security\ApiKeyAuthenticator
-        arguments:
-            - @apikey_user_provider
-            - @security.http_utils
-
-    security.access.voter:
-        class: Senegal\ApiBundle\Security\ApiVoter
-        public: false
-        arguments:
-          - @security.role_hierarchy
+            - @service_container
         tags:
-           - { name: security.voter }
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     senegal_api.param_converter.collection_param_converter:
         class: Senegal\ApiBundle\ParamConverter\CollectionParamConverter

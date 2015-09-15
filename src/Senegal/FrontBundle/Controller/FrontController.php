@@ -38,27 +38,27 @@ class FrontController extends Controller
 
     protected function apiGet($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->get($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->get($url, $this->getApiOptions($options));
     }
 
     protected function apiDelete($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->delete($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->delete($url, $this->getApiOptions($options));
     }
 
     protected function apiPost($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->post($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->post($url, $this->getApiOptions($options));
     }
 
     protected function apiPut($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->put($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->put($url, $this->getApiOptions($options));
     }
 
     protected function apiPatch($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->patch($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->patch($url, $this->getApiOptions($options));
     }
 
     private function getApiOptions(array $options = [])

@@ -2,6 +2,9 @@
 
 namespace Senegal\BackBundle\Controller;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BackController extends Controller
@@ -36,33 +39,90 @@ class BackController extends Controller
         return $this->get('translator')->trans($id, $parameters, $domain, $locale);
     }
 
+    /**
+     * Send a GET request.
+     *
+     * @param string|array|Url $url     URL or URI template
+     * @param array            $options Array of request options to apply.
+     *
+     * @return ResponseInterface
+     *
+     * @throws RequestException When an error is encountered
+     */
     protected function apiGet($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->get($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->get($url, $this->getApiOptions($options));
     }
 
+    /**
+     * Send a DELETE request.
+     *
+     * @param string|array|Url $url     URL or URI template
+     * @param array            $options Array of request options to apply.
+     *
+     * @return ResponseInterface
+     *
+     * @throws RequestException When an error is encountered
+     */
     protected function apiDelete($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->delete($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->delete($url, $this->getApiOptions($options));
     }
 
+    /**
+     * Send a POST request.
+     *
+     * @param string|array|Url $url     URL or URI template
+     * @param array            $options Array of request options to apply.
+     *
+     * @return ResponseInterface
+     *
+     * @throws RequestException When an error is encountered
+     */
     protected function apiPost($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->post($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->post($url, $this->getApiOptions($options));
     }
 
+    /**
+     * Send a PUT request.
+     *
+     * @param string|array|Url $url     URL or URI template
+     * @param array            $options Array of request options to apply.
+     *
+     * @return ResponseInterface
+     *
+     * @throws RequestException When an error is encountered
+     */
     protected function apiPut($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->put($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->put($url, $this->getApiOptions($options));
     }
 
+    /**
+     * Send a PATCH request.
+     *
+     * @param string|array|Url $url     URL or URI template
+     * @param array            $options Array of request options to apply.
+     *
+     * @return ResponseInterface
+     *
+     * @throws RequestException When an error is encountered
+     */
     protected function apiPatch($url = null, array $options = [])
     {
-        return $this->get('senegal_api_handler')->patch($url, $this->getApiOptions($options));
+        return $this->get('senegal.api.client')->patch($url, $this->getApiOptions($options));
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
     private function getApiOptions(array $options = [])
     {
-        return array_merge($options, ['headers' => ['api-key' => '']]); //$this->getUser()->getToken()
+        $token = $this->getUser() ? $this->getUser()->getToken() : null;
+
+        return array_merge($options, ['headers' => ['api-key' => $token, 'referer' => $this->get('request')->getUri()]]);
     }
 }
